@@ -1,0 +1,362 @@
+[
+  {
+    "date": "2018-04-07T14:30:00.000Z",
+    "team1": "Mumbai Indians",
+    "team2": "Chennai Super Kings",
+    "location": "Wankhede Stadium, Mumbai, Maharashtra"
+  },
+  {
+    "date": "2018-04-08T10:30:00.000Z",
+    "team1": "Delhi Dare Devils",
+    "team2": "Kings XI Punjab",
+    "location": "Feroz Shah Kotla Stadium, Delhi"
+  },
+  {
+    "date": "2018-04-08T14:30:00.000Z",
+    "team1": "Kolkata Knight Riders",
+    "team2": "Royal Challengers Bangalore",
+    "location": "Eden Garden Stadium, Kolkata, West Bengal"
+  },
+  {
+    "date": "2018-04-09T14:30:00.000Z",
+    "team1": "Sun Risers Hyderabad",
+    "team2": "Rajasthan Royals",
+    "location": "Rajiv Gandhi International Stadium, Hyderabad"
+  },
+  {
+    "date": "2018-04-10T14:30:00.000Z",
+    "team1": "Chennai Super Kings",
+    "team2": "Kolkata Knight Riders",
+    "location": "M.A.Chidambaram Stadium Chennai, Tamil Nadu"
+  },
+  {
+    "date": "2018-04-11T14:30:00.000Z",
+    "team1": "Rajasthan Royals",
+    "team2": "Delhi Dare Devils",
+    "location": "Sawai Man Singh Stadium, Jaipur, Rajasthan"
+  },
+  {
+    "date": "2018-04-12T14:30:00.000Z",
+    "team1": "Sunrisers Hyderabad",
+    "team2": "Mumbai Indians",
+    "location": "Rajiv Gandhi International Stadium, Hyderabad"
+  },
+  {
+    "date": "2018-04-13T14:30:00.000Z",
+    "team1": "Royal Challengers Bangalore",
+    "team2": "Kings XI Punjab",
+    "location": "M.Chinnaswamy Stadium Bengaluru, Karnataka"
+  },
+  {
+    "date": "2018-04-14T10:30:00.000Z",
+    "team1": "Mumbai Indians",
+    "team2": "Delhi Dare Devils",
+    "location": "Wankhede Stadium Mumbai, Maharashtra"
+  },
+  {
+    "date": "2018-04-14T14:30:00.000Z",
+    "team1": "Kolkata Knight Riders",
+    "team2": "Sun Risers Hyderabad",
+    "location": "Eden Garden Stadium, Kolkata, West Bengal"
+  },
+  {
+    "date": "2018-04-15T10:30:00.000Z",
+    "team1": "Royal Challengers Bangalore",
+    "team2": "Rajasthan Royals",
+    "location": "M.Chinnaswamy Stadium Bengaluru, Karnataka"
+  },
+  {
+    "date": "2018-04-15T14:30:00.000Z",
+    "team1": "Kings XI Punjab",
+    "team2": "Chennai Supers Kings",
+    "location": "Holkar Stadium Cricket Stadium, Indore, Madhya Pradesh"
+  },
+  {
+    "date": "2018-04-16T14:30:00.000Z",
+    "team1": "Kolkata Knight Riders",
+    "team2": "Delhi Dare Devils",
+    "location": "Eden Garden Stadium, Kolkata, West Bengal"
+  },
+  {
+    "date": "2018-04-17T14:30:00.000Z",
+    "team1": "Mumbai Indians",
+    "team2": "Royal Challengers Bangalore",
+    "location": "Wankhede Stadium Mumbai, Maharashtra"
+  },
+  {
+    "date": "2018-04-18T14:30:00.000Z",
+    "team1": "Rajasthan Royals",
+    "team2": "Kolkata Knight Riders",
+    "location": "Sawai Man Singh Stadium, Jaipur, Rajasthan"
+  },
+  {
+    "date": "2018-04-19T14:30:00.000Z",
+    "team1": "Kings XI Punjab",
+    "team2": "Sun Risers Hyderabad",
+    "location": "Holkar Stadium Cricket Stadium, Indore, Madhya Pradesh"
+  },
+  {
+    "date": "2018-04-20T14:30:00.000Z",
+    "team1": "Chennai Supers Kings",
+    "team2": "Rajasthan Royals",
+    "location": "M.A.Chidambaram Stadium Chennai, Tamil Nadu"
+  },
+  {
+    "date": "2018-04-21T10:30:00.000Z",
+    "team1": "Kolkata Knight Riders",
+    "team2": "Kings XI Punjab",
+    "location": "Eden Garden Stadium, Kolkata, West Bengal"
+  },
+  {
+    "date": "2018-04-21T14:30:00.000Z",
+    "team1": "Delhi Dare Devils",
+    "team2": "Royal Challengers Bangalore",
+    "location": "Feroz Shah Kotla Stadium, Delhi"
+  },
+  {
+    "date": "2018-04-22T10:30:00.000Z",
+    "team1": "Sunrisers Hyderabad",
+    "team2": "Chennai Super Kings",
+    "location": "Rajiv Gandhi International Stadium, Hyderabad"
+  },
+  {
+    "date": "2018-04-22T14:30:00.000Z",
+    "team1": "Rajasthan Royals",
+    "team2": "Mumbai Indians",
+    "location": "Sawai Man Singh Stadium, Jaipur, Rajasthan"
+  },
+  {
+    "date": "2018-04-23T14:30:00.000Z",
+    "team1": "Kings XI Punjab",
+    "team2": "Delhi Dare Devils",
+    "location": "Holkar Stadium Cricket Stadium, Indore, Madhya Pradesh"
+  },
+  {
+    "date": "2018-04-24T14:30:00.000Z",
+    "team1": "Mumbai Indians",
+    "team2": "Sunrisers Hyderabad",
+    "location": "Wankhede Stadium Mumbai, Maharashtra"
+  },
+  {
+    "date": "2018-04-25T14:30:00.000Z",
+    "team1": "Royal Challengers Bangalore",
+    "team2": "Chennai Super Kings",
+    "location": "M.Chinnaswamy Stadium Bengaluru, Karnataka"
+  },
+  {
+    "date": "2018-04-26T14:30:00.000Z",
+    "team1": "Sunrisers Hyderabad",
+    "team2": "Kings XI Punjab",
+    "location": "Rajiv Gandhi International Stadium, Hyderabad"
+  },
+  {
+    "date": "2018-04-27T14:30:00.000Z",
+    "team1": "Delhi Dare Devils",
+    "team2": "Kolkata Knight Riders",
+    "location": "Feroz Shah Kotla Stadium, Delhi"
+  },
+  {
+    "date": "2018-04-28T14:30:00.000Z",
+    "team1": "Chennai Super Kings",
+    "team2": "Mumbai",
+    "location": "M.A.Chidambaram Stadium Chennai, Tamil Nadu"
+  },
+  {
+    "date": "2018-04-29T10:30:00.000Z",
+    "team1": "Rajasthan Royals",
+    "team2": "Sunrisers Hyderabad",
+    "location": "Sawai Man Singh Stadium, Jaipur, Rajasthan"
+  },
+  {
+    "date": "2018-04-29T14:30:00.000Z",
+    "team1": "Royal Challengers Bangalore",
+    "team2": "Kolkata Knight Riders",
+    "location": "M.Chinnaswamy Stadium Bengaluru, Karnataka"
+  },
+  {
+    "date": "2018-04-30T14:30:00.000Z",
+    "team1": "Chennai Super Kings",
+    "team2": "Delhi Dare Devils",
+    "location": "M.A.Chidambaram Stadium Chennai, Tamil Nadu"
+  },
+  {
+    "date": "2018-05-01T14:30:00.000Z",
+    "team1": "Royal Challengers Bangalore",
+    "team2": "Mumbai Indians",
+    "location": "M.Chinnaswamy Stadium Bengaluru, Karnataka"
+  },
+  {
+    "date": "2018-05-02T14:30:00.000Z",
+    "team1": "Delhi Dare Devils",
+    "team2": "Rajasthan Royals",
+    "location": "Feroz Shah Kotla Stadium, Delhi"
+  },
+  {
+    "date": "2018-05-03T14:30:00.000Z",
+    "team1": "Kolkata Knight Riders",
+    "team2": "Chennai Super Kings",
+    "location": "Eden Garden Stadium, Kolkata, West Bengal"
+  },
+  {
+    "date": "2018-05-04T14:30:00.000Z",
+    "team1": "Kings XI Punjab",
+    "team2": "Mumbai Indians",
+    "location": "I.S. Bindra Punjab Cricket Association Stadium, Mohali"
+  },
+  {
+    "date": "2018-05-05T10:30:00.000Z",
+    "team1": "Chennai Super Kings",
+    "team2": "Royal Challengers Bangalore",
+    "location": "M.A.Chidambaram Stadium Chennai, Tamil Nadu"
+  },
+  {
+    "date": "2018-05-05T14:30:00.000Z",
+    "team1": "Sunrisers Hyderabad",
+    "team2": "Delhi Dare Devils",
+    "location": "Rajiv Gandhi International Stadium, Hyderabad"
+  },
+  {
+    "date": "2018-05-06T10:30:00.000Z",
+    "team1": "Mumbai Indians",
+    "team2": "Kolkata Knight Riders",
+    "location": "Wankhede Stadium Mumbai, Maharashtra"
+  },
+  {
+    "date": "2018-05-06T14:30:00.000Z",
+    "team1": "Kings XI Punjab",
+    "team2": "Rajasthan Royals",
+    "location": "I.S. Bindra Punjab Cricket Association Stadium, Mohali"
+  },
+  {
+    "date": "2018-05-07T14:30:00.000Z",
+    "team1": "Sunrisers Hyderabad",
+    "team2": "Royal Challengers Bangalore",
+    "location": "Rajiv Gandhi International Stadium, Hyderabad"
+  },
+  {
+    "date": "2018-05-08T14:30:00.000Z",
+    "team1": "Rajasthan Royals",
+    "team2": "Kings XI Punjab",
+    "location": "Sawai Man Singh Stadium, Jaipur, Rajasthan"
+  },
+  {
+    "date": "2018-05-09T14:30:00.000Z",
+    "team1": "Kolkata Knight Riders",
+    "team2": "Mumbai Indians",
+    "location": "Eden Garden Stadium, Kolkata, West Bengal"
+  },
+  {
+    "date": "2018-05-10T14:30:00.000Z",
+    "team1": "Delhi Dare Devils",
+    "team2": "Sunrisers Hyderabad",
+    "location": "Feroz Shah Kotla Stadium, Delhi"
+  },
+  {
+    "date": "2018-05-11T14:30:00.000Z",
+    "team1": "Rajasthan Royals",
+    "team2": "Chennai Super Kings",
+    "location": "Sawai Man Singh Stadium, Jaipur, Rajasthan"
+  },
+  {
+    "date": "2018-05-12T10:30:00.000Z",
+    "team1": "Kings XI Punjab",
+    "team2": "Kolkata Knight Riders",
+    "location": "I.S. Bindra Punjab Cricket Association Stadium, Mohali"
+  },
+  {
+    "date": "2018-05-12T14:30:00.000Z",
+    "team1": "Royal Challengers Bangalore",
+    "team2": "Delhi Dare Devils",
+    "location": "M.Chinnaswamy Stadium Bengaluru, Karnataka"
+  },
+  {
+    "date": "2018-05-13T10:30:00.000Z",
+    "team1": "Chennai Super Kings",
+    "team2": "Sunrisers Hyderabad",
+    "location": "M.A.Chidambaram Stadium Chennai, Tamil Nadu"
+  },
+  {
+    "date": "2018-05-13T14:30:00.000Z",
+    "team1": "Mumbai Indians",
+    "team2": "Rajasthan Royals",
+    "location": "Wankhede Stadium Mumbai, Maharashtra"
+  },
+  {
+    "date": "2018-05-14T14:30:00.000Z",
+    "team1": "Kings XI Punjab",
+    "team2": "Royal Challengers Bangalore",
+    "location": "I.S. Bindra Punjab Cricket Association Stadium, Mohali"
+  },
+  {
+    "date": "2018-05-15T14:30:00.000Z",
+    "team1": "Kolkata Knight Riders",
+    "team2": "Rajasthan Royals",
+    "location": "Eden Garden Stadium, Kolkata, West Bengal"
+  },
+  {
+    "date": "2018-05-16T14:30:00.000Z",
+    "team1": "Mumbai Indians",
+    "team2": "Kings XI Punjab",
+    "location": "Wankhede Stadium Mumbai, Maharashtra"
+  },
+  {
+    "date": "2018-05-17T14:30:00.000Z",
+    "team1": "Royal Challengers Bangalore",
+    "team2": "Sunrisers Hyderabad",
+    "location": "M.Chinnaswamy Stadium Bengaluru, Karnataka"
+  },
+  {
+    "date": "2018-05-18T14:30:00.000Z",
+    "team1": "Delhi Dare Devils",
+    "team2": "Chennai Super Kings",
+    "location": "Feroz Shah Kotla Stadium, Delhi"
+  },
+  {
+    "date": "2018-05-19T10:30:00.000Z",
+    "team1": "Rajasthan Royals",
+    "team2": "Royal Challengers Bangalore",
+    "location": "Sawai Man Singh Stadium, Jaipur, Rajasthan"
+  },
+  {
+    "date": "2018-05-19T14:30:00.000Z",
+    "team1": "Sunrisers Hyderabad",
+    "team2": "Kolkata Knight Riders",
+    "location": "Rajiv Gandhi International Stadium, Hyderabad"
+  },
+  {
+    "date": "2018-05-20T10:30:00.000Z",
+    "team1": "Delhi Dare Devils",
+    "team2": "Mumbai Indians",
+    "location": "Feroz Shah Kotla Stadium, Delhi"
+  },
+  {
+    "date": "2018-05-20T14:30:00.000Z",
+    "team1": "Chennai Super Kings",
+    "team2": "Kings XI Punjab",
+    "location": "M.A.Chidambaram Stadium Chennai, Tamil Nadu"
+  },
+  {
+    "date": "2018-05-22T14:30:00.000Z",
+    "team1": "TBC",
+    "team2": "TBC",
+    "location": "Wankhede Stadium Mumbai, Maharashtra"
+  },
+  {
+    "date": "2018-05-23T14:30:00.000Z",
+    "team1": "TBC",
+    "team2": "TBC",
+    "location": "TBC"
+  },
+  {
+    "date": "2018-05-25T14:30:00.000Z",
+    "team1": "TBC",
+    "team2": "TBC",
+    "location": "TBC"
+  },
+  {
+    "date": "2018-05-27T14:30:00.000Z",
+    "team1": "TBC",
+    "team2": "TBC",
+    "location": "Wankhede Stadium Mumbai, Maharashtra"
+  }
+]
