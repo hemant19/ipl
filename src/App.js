@@ -60,10 +60,14 @@ class App extends Component {
           <div>
             <Header
               loggedIn={!!this.state.user}
-              onLogout={e => auth.signOut()}
+              onLogout={e => {
+                auth.signOut().then(() => {
+                  window.location.reload();
+                });
+              }}
             />
             <Route
-              path="/"
+              path="/(home)?"
               exact
               component={() => (
                 <Home
