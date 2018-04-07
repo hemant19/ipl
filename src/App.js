@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Header } from './Header';
 import { getMatches, getMatchesWithVotes, auth } from './service';
+import MatchVotes from './MatchVotes';
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Home from './Home';
 import Login from './Login';
@@ -40,15 +43,22 @@ class App extends Component {
     this.setState(prev => ({ matches: { ...prev.matches, ...list } }));
   }
 
+  renderHome() {
+    return this.state.user ?
+      <Home matches={this.state.matches} onMatchListUpdated={this.onMatchListUpdated} user={this.state.user} /> :
+      <Login />
+  }
+
   render() {
     return (
       <div>
         <Header loggedIn={!!this.state.user} onLogout={e => auth.signOut()} />
-        {
-          this.state.user ?
-            <Home matches={this.state.matches} onMatchListUpdated={this.onMatchListUpdated} user={this.state.user} /> :
-            <Login />
-        }
+        <BrowserRouter>
+        <div>
+            <Route path="/" exact component={() => this.renderHome()} />
+            <Route path="/matches/{matchId}" component={MatchVotes} />
+          </div>
+        </BrowserRouter>
       </div>
     );
   }

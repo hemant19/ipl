@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Card, { CardContent } from 'material-ui/Card';
+import Card, { CardContent, CardActions } from 'material-ui/Card';
+import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import { FormLabel, FormControl, FormControlLabel } from 'material-ui/Form';
+import { withRouter } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -24,8 +26,12 @@ const styles = theme => ({
 });
 
 function SimpleCard(props) {
-  const { classes, onTeamSelected } = props;
-  const { team1, team2, location, selection, started, date } = props.match;
+  const { classes, onTeamSelected, history } = props;
+  const { matchId, team1, team2, location, selection, votingClosed, date } = props.matchData;
+
+  const handleViewSelections = (matchId) => (e) => {
+    history.push(`/matches/${matchId}`);
+  }
 
   return (
     <div>
@@ -37,7 +43,7 @@ function SimpleCard(props) {
           </Typography>
           <Typography className={classes.pos}>{location}</Typography>
 
-          {!started ?
+          {!votingClosed ?
             <FormControl component="fieldset" required className={classes.formControl}>
               <FormLabel component="legend">Make a choice</FormLabel>
               <RadioGroup
@@ -51,7 +57,14 @@ function SimpleCard(props) {
                 <FormControlLabel value={team2} control={<Radio color="primary" />} label={team2} />
               </RadioGroup>
             </FormControl> :
-            <Typography > The match has already started your selection is {selection}</Typography>
+            <Typography > The voting has closed. Your selection - {selection}</Typography>
+          }
+
+          {votingClosed ?
+            <CardActions>
+              <Button size="small" onClick={handleViewSelections(matchId)}>View selection</Button>
+            </CardActions>
+            : null
           }
         </CardContent>
 
@@ -64,4 +77,4 @@ SimpleCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleCard);
+export default withRouter(withStyles(styles)(SimpleCard));
