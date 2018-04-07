@@ -89,28 +89,35 @@ export function getMatch(matchId) {
 }
 
 export function getVoteDetails(matchId) {
-  return getMatch(matchId).then(match =>
-    store
-      .collection('votes')
-      .doc(matchId)
-      .get()
-      .then(snap => {
-        const votes = snap.data();
-        console.log(votes);
-        const team1Players = Object.entries(votes)
-          .filter(([userId, vote]) => vote.team === match.team1)
-          .map(([userId, vote]) => vote.username);
+  return getMatch(matchId).then(
+    match =>
+      match && match.votingClosed
+        ? store
+            .collection('votes')
+            .doc(matchId)
+            .get()
+            .then(snap => {
+              const votes = snap.data();
+              const team1Players = Object.entries(votes)
+                .filter(([userId, vote]) => vote.team === match.team1)
+                .map(([userId, vote]) => vote.username);
 
-        const team2Players = Object.entries(votes)
-          .filter(([userId, vote]) => vote.team === match.team2)
-          .map(([userId, vote]) => vote.username);
+              const team2Players = Object.entries(votes)
+                .filter(([userId, vote]) => vote.team === match.team2)
+                .map(([userId, vote]) => vote.username);
 
-        return {
-          team1: match.team1,
-          team2: match.team2,
-          team1Players,
-          team2Players
-        };
-      })
+              return {
+                team1: match.team1,
+                team2: match.team2,
+                team1Players,
+                team2Players
+              };
+            })
+        : {
+            team1: 'Nice try',
+            team2: 'Not Happening bro!',
+            team1Players: [],
+            team2Players: []
+          }
   );
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+
 import { getVoteDetails } from './service';
 
 const styles = theme => ({
@@ -16,6 +18,9 @@ const styles = theme => ({
   ul: {
     backgroundColor: 'inherit',
     padding: 0
+  },
+  title: {
+    padding: '10px'
   }
 });
 
@@ -24,7 +29,10 @@ class MatchVotes extends React.Component {
     super();
     this.state = {
       details: {
-        team1Players: []
+        team1: '',
+        team2: '',
+        team1Players: [],
+        team2Players: []
       }
     };
   }
@@ -39,15 +47,32 @@ class MatchVotes extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Paper className={classes.root}>
-        <List className={classes.root} subheader={<li />}>
-          {this.state.details.team1Players.map((name, i) => (
-            <ListItem key={i}>
-              <ListItemText primary={name} />
-            </ListItem>
-          ))}
-        </List>
-      </Paper>
+      <div>
+        <Paper className={classes.root}>
+          <Typography variant="headline" className={classes.title}>
+            {this.state.details.team1}
+          </Typography>
+          <List className={classes.root} subheader={<li />}>
+            {this.state.details.team1Players.map((name, i) => (
+              <ListItem key={i}>
+                <ListItemText primary={name} />
+              </ListItem>
+            ))}
+          </List>
+        </Paper>
+        <Paper className={classes.root}>
+          <Typography variant="headline" className={classes.title}>
+            {this.state.details.team2}
+          </Typography>
+          <List className={classes.root} subheader={<li />}>
+            {this.state.details.team2Players.map((name, i) => (
+              <ListItem key={i}>
+                <ListItemText primary={name} />
+              </ListItem>
+            ))}
+          </List>
+        </Paper>
+      </div>
     );
   }
 }
