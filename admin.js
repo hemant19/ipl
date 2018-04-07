@@ -10,4 +10,8 @@ admin.initializeApp({
 var matches = require('./match.json'); 
 
 matches.map(match => 
-admin.firestore().collection('matches').add(match))
+
+admin.firestore().collection('matches').add({
+  ...match,
+  date: new Date(Date.parse(match.date))
+}))

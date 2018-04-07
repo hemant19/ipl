@@ -25,30 +25,34 @@ const styles = theme => ({
 
 function SimpleCard(props) {
   const { classes, onTeamSelected } = props;
-  const { team1, team2, location, selection } = props.match;
+  const { team1, team2, location, selection, started, date } = props.match;
 
   return (
     <div>
       <Card className={classes.card}>
         <CardContent>
-          <Typography className={classes.title}>Match of the day</Typography>
+          <Typography className={classes.title}>{date.toString()}</Typography>
           <Typography variant="headline" component="h2">
             {team1} vs {team2}
           </Typography>
           <Typography className={classes.pos}>{location}</Typography>
-          <FormControl component="fieldset" required className={classes.formControl}>
-            <FormLabel component="legend">Make a choice</FormLabel>
-            <RadioGroup
-              aria-label="My Team"
-              name="myTeam"
-              className={classes.group}
-              value={selection}
-              onChange={(event, value) => onTeamSelected(value)}
-            >
-              <FormControlLabel value={team1} control={<Radio color="primary" />} label={team1} />
-              <FormControlLabel value={team2} control={<Radio color="primary" />} label={team2} />
-            </RadioGroup>
-          </FormControl>
+
+          {!started ?
+            <FormControl component="fieldset" required className={classes.formControl}>
+              <FormLabel component="legend">Make a choice</FormLabel>
+              <RadioGroup
+                aria-label="My Team"
+                name="myTeam"
+                className={classes.group}
+                value={selection}
+                onChange={(event, value) => onTeamSelected(value)}
+              >
+                <FormControlLabel value={team1} control={<Radio color="primary" />} label={team1} />
+                <FormControlLabel value={team2} control={<Radio color="primary" />} label={team2} />
+              </RadioGroup>
+            </FormControl> :
+            <Typography > The match has already started your selection is {selection}</Typography>
+          }
         </CardContent>
 
       </Card>
