@@ -4,8 +4,14 @@ import '@firebase/auth';
 import { config } from './config/firebase';
 
 firebase.initializeApp(config);
+let store = firebase.firestore();
 
-const store = firebase.firestore();
+firebase
+  .firestore()
+  .enablePersistence()
+  .then(_ => {
+    store = firebase.firestore();
+  });
 
 export const auth = firebase.auth();
 
