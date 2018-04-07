@@ -4,42 +4,36 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import { getVoteDetails } from './service';
 
-
 const styles = theme => ({
   root: {
-    width: '100%',
-    maxWidth: 360,
+    margin: '10px',
     backgroundColor: theme.palette.background.paper,
-    position: 'relative',
-    overflow: 'auto',
-    maxHeight: 300,
+    position: 'relative'
   },
   listSection: {
-    backgroundColor: 'inherit',
+    backgroundColor: 'inherit'
   },
   ul: {
     backgroundColor: 'inherit',
-    padding: 0,
-  },
+    padding: 0
+  }
 });
 
 class MatchVotes extends React.Component {
-
   constructor() {
     super();
     this.state = {
-      details: {}
-    }
+      details: {
+        team1Players: []
+      }
+    };
   }
 
-
   componentDidMount() {
-
-    const { matchId } = this.props;
-
-    getVoteDetails(matchId).then((details) => {
-      this.setState({ details })
-    })
+    const { match } = this.props;
+    getVoteDetails(match.params.matchId).then(details => {
+      this.setState({ details });
+    });
   }
 
   render() {
@@ -47,14 +41,14 @@ class MatchVotes extends React.Component {
     return (
       <Paper className={classes.root}>
         <List className={classes.root} subheader={<li />}>
-          {this.state.details.team1Players.map(name =>
-            <ListItem>
-              <ListItemText> {name} </ListItemText>
+          {this.state.details.team1Players.map((name, i) => (
+            <ListItem key={i}>
+              <ListItemText primary={name} />
             </ListItem>
-          )}
+          ))}
         </List>
       </Paper>
-    )
+    );
   }
 }
 

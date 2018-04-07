@@ -2,9 +2,8 @@ import React from 'react';
 import MatchList from './MatchList';
 
 export default function Home(props) {
-  const { matches, onMatchListUpdated, user } = props;
+  const { matches, onMatchListUpdated, user, onError } = props;
   const onMatchUpdated = (id, match) => {
-
     onMatchListUpdated({
       ...matches,
       [id]: match
@@ -12,6 +11,11 @@ export default function Home(props) {
   };
 
   return (
-    <MatchList matches={matches} onMatchUpdated={onMatchUpdated} user={user} />
+    <MatchList
+      matches={matches}
+      onError={onError}
+      onMatchUpdated={onMatchUpdated}
+      user={user}
+    />
   );
 }

@@ -1,21 +1,48 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import Button from 'material-ui/Button';
-
+import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
+import IconButton from 'material-ui/IconButton';
+import AccountCircle from 'material-ui-icons/AccountCircle';
+import ExitToApp from 'material-ui-icons/ExitToApp';
+import { withRouter } from 'react-router-dom';
 
-export function Header(props, state) {
-  const { loggedIn, onLogout } = props;
+const styles = {
+  root: {
+    'flex-grow': 1
+  },
+  title: {
+    flex: 1
+  }
+};
+
+function Header(props, state) {
+  const { loggedIn, onLogout, classes, history } = props;
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.root}>
       <Toolbar>
-        <Typography variant="title" color="inherit">
+        <Typography
+          variant="title"
+          color="inherit"
+          className={classes.title}
+          onClick={_ => history.push('/')}
+        >
           IPL 2018
         </Typography>
-        {loggedIn ? <Button color="inherit" onClick={e => onLogout()}>Logout</Button> : null}
+        {loggedIn ? (
+          <IconButton color="inherit" onClick={e => onLogout()}>
+            <ExitToApp />
+          </IconButton>
+        ) : (
+          <IconButton color="inherit" onClick={_ => history.push('/login')}>
+            <AccountCircle />
+          </IconButton>
+        )}
       </Toolbar>
     </AppBar>
   );
 }
+
+export default withRouter(withStyles(styles)(Header));
