@@ -1,13 +1,13 @@
 import React from 'react';
 import Match from './Match';
-import { vote } from './service';
+import { vote, closeVoting } from './service';
 
 const handleTeamSelected = (user, onMatchUpdated, onError) => (
   id,
   match
 ) => selection => {
   if (user) {
-    vote(id, user.uid, user.displayName, selection);
+    vote(id, user, selection);
     onMatchUpdated(id, { ...match, selection });
   } else {
     onError({
@@ -16,16 +16,21 @@ const handleTeamSelected = (user, onMatchUpdated, onError) => (
   }
 };
 
+const handleVoteClosing = (user, onMatchUpdated) => (id, match) => e => {
+  return closeVoting(user, id).then(() =>
+    onMatchUpdated(id, { ...match, votingClosed: true })
+  );
+};
+
 export default function MatchList(props) {
   const { matches, onMatchUpdated, user, onError } = props;
   const handler = handleTeamSelected(user, onMatchUpdated, onError);
-
+  const votingClosedHandler = handleVoteClosing(user, onMatchUpdated);
   return (
     <div>
       {Object.entries(matches)
         .map(match => {
-          if (!user || match.votingClosed || match.date < Date.now())
-            match.votingClosed = true;
+          if (!user || match.votingClosed) match.votingClosed = true;
           return match;
         })
         .map(([id, match]) => (
@@ -33,6 +38,8 @@ export default function MatchList(props) {
             key={id}
             matchData={{ ...match, matchId: id }}
             onTeamSelected={handler(id, match)}
+            onMatchVotingClosed={votingClosedHandler(id, match)}
+            isAdmin={user && user.role && user.role.admin}
           />
         ))}
     </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   getMatches,
   getMatchesWithVotes,
+  getUserRoles,
   auth,
   setUpMessaging
 } from './service';
@@ -38,10 +39,20 @@ class App extends Component {
   handleOnLogin = user => {
     if (user) {
       if (!this.state.user) {
+        this.setState({ user });
+
         getMatchesWithVotes(user.uid).then(matches => {
           this.setState({ matches });
         });
-        this.setState({ user });
+
+        getUserRoles(user.uid).then(user => {
+          this.setState(prev => ({
+            user: {
+              ...prev.user,
+              ...user
+            }
+          }));
+        });
       }
     } else {
       this.setState({ user: null });

@@ -17,9 +17,7 @@ const styles = {
   }
 };
 
-function Header(props, state) {
-  const { loggedIn, onLogout, classes, history } = props;
-
+function Header({ loggedIn, onLogout, classes, history }) {
   return (
     <AppBar position="static" className={classes.root}>
       <Toolbar>

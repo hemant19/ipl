@@ -72,20 +72,41 @@ export function getMatchesWithVotes(userId) {
     });
 }
 
-export function vote(matchId, userId, username, team) {
-  if (userId && matchId && team) {
+export function getUserRoles(userId) {
+  return store
+    .collection('users')
+    .doc(userId)
+    .get()
+    .then(snap => snap.data());
+}
+
+export function vote(user, matchId, team) {
+  if (user.uid && user.role.player && matchId && team) {
     const votes = store.collection('votes').doc(matchId);
     return votes.set(
       {
-        [userId]: {
+        [user.uid]: {
           team,
-          username,
+          username: user.displayName,
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         }
       },
       { merge: true }
     );
   }
+}
+
+export function closeVoting(user, matchId) {
+  if (user.role.admin) {
+    return store
+      .collection('matches')
+      .doc(matchId)
+      .update({
+        votingClosed: true
+      });
+  }
+
+  return new Promise((res, rej) => rej());
 }
 
 export function getMatch(matchId) {
