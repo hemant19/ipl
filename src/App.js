@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { getMatches, getMatchesWithVotes, auth } from './service';
+import {
+  getMatches,
+  getMatchesWithVotes,
+  auth,
+  setUpMessaging
+} from './service';
 import MatchVotes from './MatchVotes';
 
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -26,6 +31,8 @@ class App extends Component {
     });
 
     auth.onAuthStateChanged(this.handleOnLogin);
+
+    setUpMessaging(this.handleError);
   }
 
   handleOnLogin = user => {

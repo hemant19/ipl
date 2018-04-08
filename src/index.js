@@ -8,16 +8,17 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: "#f05545",
-      main: "#b71c1c",
-      dark: "#7f0000",
+      light: '#f05545',
+      main: '#b71c1c',
+      dark: '#7f0000'
     }
   }
 });
 
-ReactDOM.render((
+ReactDOM.render(
   <MuiThemeProvider theme={theme}>
-      <App />
-  </MuiThemeProvider>
-), document.getElementById('root'));
+    <App />
+  </MuiThemeProvider>,
+  document.getElementById('root')
+);
 registerServiceWorker();

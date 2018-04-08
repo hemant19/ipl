@@ -1,6 +1,7 @@
 import { firebase } from '@firebase/app';
 import '@firebase/firestore';
 import '@firebase/auth';
+import '@firebase/messaging';
 import { config } from './config/firebase';
 
 firebase.initializeApp(config);
@@ -14,6 +15,7 @@ firebase
   });
 
 export const auth = firebase.auth();
+export const messaging = firebase.messaging();
 
 export function getMatches() {
   return store
@@ -126,4 +128,27 @@ export function getVoteDetails(matchId) {
             team2Players: []
           }
   );
+}
+
+export function setUpMessaging(handleError) {
+  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    console.log('Setting up messaging');
+    messaging
+      .requestPermission()
+      .then(data => {
+        return messaging.getToken();
+      })
+      .catch(err => {
+        handleError({
+          message: "You won't be able to see the notifications!"
+        });
+      })
+      .then(currentToken => {
+        return saveToken(currentToken);
+      });
+  }
+}
+
+export function saveToken(currentToken) {
+  console.log('TODO: // save token => ' + currentToken);
 }
