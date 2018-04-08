@@ -40,6 +40,7 @@ export default function MatchList(props) {
             onTeamSelected={handler(id, match)}
             onMatchVotingClosed={votingClosedHandler(id, match)}
             isAdmin={user && user.role && user.role.admin}
+            isPlayer={user && user.role && user.role.player}
           />
         ))}
     </div>

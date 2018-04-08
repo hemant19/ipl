@@ -30,7 +30,8 @@ function SimpleCard(props) {
     onTeamSelected,
     history,
     onMatchVotingClosed,
-    isAdmin
+    isAdmin,
+    isPlayer
   } = props;
   const {
     matchId,
@@ -56,7 +57,7 @@ function SimpleCard(props) {
           </Typography>
           <Typography className={classes.pos}>{location}</Typography>
 
-          {!votingClosed ? (
+          {!votingClosed && isPlayer ? (
             <FormControl
               component="fieldset"
               required
@@ -84,8 +85,9 @@ function SimpleCard(props) {
             </FormControl>
           ) : (
             <Typography>
-              {' '}
-              The voting has closed. Your selection - {selection}
+              {isPlayer
+                ? `The voting has closed. Your selection - ${selection}`
+                : ''}
             </Typography>
           )}
           <CardActions>
