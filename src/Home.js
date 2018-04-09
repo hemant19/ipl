@@ -1,8 +1,8 @@
 import React from 'react';
 import MatchList from './MatchList';
+import { LinearProgress } from 'material-ui/Progress';
 
-export default function Home(props) {
-  const { matches, onMatchListUpdated, user, onError } = props;
+function Home({ matches, onMatchListUpdated, user, onError }) {
   const onMatchUpdated = (id, match) => {
     onMatchListUpdated({
       ...matches,
@@ -11,11 +11,19 @@ export default function Home(props) {
   };
 
   return (
-    <MatchList
-      matches={matches}
-      onError={onError}
-      onMatchUpdated={onMatchUpdated}
-      user={user}
-    />
+    <div>
+      {matches && Object.keys(matches).length !== 0 ? (
+        <MatchList
+          matches={matches}
+          onError={onError}
+          onMatchUpdated={onMatchUpdated}
+          user={user}
+        />
+      ) : (
+        <LinearProgress />
+      )}
+    </div>
   );
 }
+
+export default Home;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardContent, CardActions } from 'material-ui/Card';
 import Button from 'material-ui/Button';
@@ -24,15 +23,15 @@ const styles = theme => ({
   }
 });
 
-function SimpleCard(props) {
-  const {
-    classes,
-    onTeamSelected,
-    history,
-    onMatchVotingClosed,
-    isAdmin,
-    isPlayer
-  } = props;
+function Match({
+  classes,
+  onTeamSelected,
+  history,
+  onMatchVotingClosed,
+  isAdmin,
+  isPlayer,
+  matchData
+}) {
   const {
     matchId,
     team1,
@@ -41,7 +40,7 @@ function SimpleCard(props) {
     selection,
     votingClosed,
     date
-  } = props.matchData;
+  } = matchData;
 
   const handleViewSelections = matchId => e => {
     history.push(`/matches/${matchId}`);
@@ -107,9 +106,4 @@ function SimpleCard(props) {
     </div>
   );
 }
-
-SimpleCard.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withRouter(withStyles(styles)(SimpleCard));
+export default withRouter(withStyles(styles)(Match));
