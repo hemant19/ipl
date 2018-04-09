@@ -10,6 +10,7 @@ import MatchVotes from './MatchVotes';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 import Snackbar from 'material-ui/Snackbar';
+import Button from 'material-ui/Button';
 
 import Header from './Header';
 import Home from './Home';
@@ -21,8 +22,10 @@ class App extends Component {
     this.state = {
       matches: {},
       user: undefined,
-      snackbarOpen: false,
-      snackbarMessage: ''
+      snackbar: {
+        open: false,
+        message: ''
+      }
     };
   }
 
@@ -35,6 +38,14 @@ class App extends Component {
 
     setUpMessaging(this.handleError);
   }
+
+  componentWillMount() {
+    window.onServiceWorkerUpdated(this.openUpdateBar);
+  }
+
+  openUpdateBar = () => {
+    this.openSnackBar('New Version Available', 'reload');
+  };
 
   handleOnLogin = user => {
     if (user) {
@@ -64,11 +75,42 @@ class App extends Component {
   };
 
   handleError = error => {
-    this.setState({ snackbarOpen: true, snackbarMessage: error.message });
+    this.openSnackBar(error.message);
   };
 
-  handleSnackBarClose = () => {
-    this.setState({ snackbarOpen: false });
+  closeSnackbar = () => {
+    this.setState({
+      snackbar: {
+        open: false,
+        message: '',
+        action: null,
+        vertical: 'bottom',
+        horizontal: 'right'
+      }
+    });
+  };
+
+  openSnackBar = (message, action, vertical = 'bottom') => {
+    this.setState({
+      snackbar: { open: true, message, action, vertical, horizontal: 'right' }
+    });
+  };
+
+  snackBarAction = () => {
+    if (this.state.snackbar.action === 'reload')
+      return (
+        <Button
+          color="secondary"
+          size="small"
+          onClick={() => {
+            window.location.reload();
+          }}
+        >
+          update
+        </Button>
+      );
+
+    return null;
   };
 
   render() {
@@ -100,12 +142,16 @@ class App extends Component {
             <Route path="/matches/:matchId" component={MatchVotes} />
 
             <Snackbar
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-              open={this.state.snackbarOpen}
-              onClose={this.handleSnackBarClose}
+              anchorOrigin={{
+                vertical: this.state.snackbar.vertical,
+                horizontal: this.state.snackbar.horizontal
+              }}
+              open={this.state.snackbar.open}
+              onClose={this.closeSnackbar}
               message={
-                <span id="message-id">{this.state.snackbarMessage}</span>
+                <span id="message-id">{this.state.snackbar.message}</span>
               }
+              action={this.snackBarAction()}
             />
           </div>
         </BrowserRouter>

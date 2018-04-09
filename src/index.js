@@ -15,10 +15,16 @@ const theme = createMuiTheme({
   }
 });
 
+//Hack to pass data to servie worker
+window.onServiceWorkerUpdated = onUpdate => {
+  window.SWUpdated = onUpdate;
+};
+
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <App />
   </MuiThemeProvider>,
   document.getElementById('root')
 );
+
 registerServiceWorker();
