@@ -7,9 +7,9 @@ const handleTeamSelected = (user, onMatchUpdated, sendMessage) => (
   match
 ) => selection => {
   if (user) {
+    onMatchUpdated(id, { ...match, selection });
     vote(user, id, selection)
       .then(() => {
-        onMatchUpdated(id, { ...match, selection });
         sendMessage({
           message: 'Your choice is recorded.'
         });

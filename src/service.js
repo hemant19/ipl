@@ -18,20 +18,26 @@ export const auth = firebase.auth();
 export const messaging = firebase.messaging();
 
 export function getMatches() {
+  const yesterday = new Date(Date.now() - 100000000);
+  const dayAftertomorrow = new Date(Date.now() + 180000000);
+
   return store
     .collection('matches')
+    .where('date', '<', dayAftertomorrow)
+    .where('date', '>', yesterday)
     .orderBy('date')
     .get()
     .then(snap => snap.docs)
-    .then(docs =>
-      docs.map(doc => ({ [doc.id]: doc.data() })).reduce((acc = {}, doc) => {
-        return { ...acc, ...doc };
-      })
-    )
-    .then(matches => {
-      // console.log(matches)
-      return matches;
-    });
+    .then(
+      docs =>
+        docs && docs.length !== 0
+          ? docs
+              .map(doc => ({ [doc.id]: doc.data() }))
+              .reduce((acc = {}, doc) => {
+                return doc ? { ...acc, ...doc } : acc;
+              })
+          : {}
+    );
 }
 
 function getVotes() {
