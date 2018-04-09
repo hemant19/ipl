@@ -3,18 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@firebase/app-types": "^0.1.2",
     "@material-ui/icons": "^1.0.0-beta.42",
     "firebase": "^4.12.1",
-    "firebase-admin": "^5.12.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.0.4",
     "material-ui": "^1.0.0-beta.40",
-    "prettier": "^1.11.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-firebaseui": "^1.2.3",
-    "react-router-dom": "^4.2.2",
+    "react-router-dom": "^4.2.2"
+  },
+  "devDependencies": {
+    "@firebase/app-types": "^0.1.2",
+    "firebase-admin": "^5.12.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.4",
+    "prettier": "^1.11.1",
     "react-scripts": "1.1.4"
   },
   "lint-staged": {
