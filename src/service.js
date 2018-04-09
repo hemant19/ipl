@@ -94,6 +94,8 @@ export function vote(user, matchId, team) {
       { merge: true }
     );
   }
+
+  return new Promise((res, rej) => rej());
 }
 
 export function closeVoting(user, matchId) {

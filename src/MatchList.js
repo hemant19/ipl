@@ -2,15 +2,25 @@ import React from 'react';
 import Match from './Match';
 import { vote, closeVoting } from './service';
 
-const handleTeamSelected = (user, onMatchUpdated, onError) => (
+const handleTeamSelected = (user, onMatchUpdated, sendMessage) => (
   id,
   match
 ) => selection => {
   if (user) {
-    vote(id, user, selection);
-    onMatchUpdated(id, { ...match, selection });
+    vote(user, id, selection)
+      .then(() => {
+        onMatchUpdated(id, { ...match, selection });
+        sendMessage({
+          message: 'Your choice is recorded.'
+        });
+      })
+      .catch(() => {
+        sendMessage({
+          message: 'Some error occurred! Please report'
+        });
+      });
   } else {
-    onError({
+    sendMessage({
       message: 'Please login first!'
     });
   }
