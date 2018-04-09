@@ -6,6 +6,7 @@ import Typography from 'material-ui/Typography';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import { FormLabel, FormControl, FormControlLabel } from 'material-ui/Form';
 import { withRouter } from 'react-router-dom';
+import { CircularProgress } from 'material-ui/Progress';
 
 const styles = theme => ({
   card: {
@@ -39,7 +40,8 @@ function Match({
     location,
     selection,
     votingClosed,
-    date
+    date,
+    isVoting
   } = matchData;
 
   const handleViewSelections = matchId => e => {
@@ -57,31 +59,37 @@ function Match({
           <Typography className={classes.pos}>{location}</Typography>
 
           {!votingClosed && isPlayer ? (
-            <FormControl
-              component="fieldset"
-              required
-              className={classes.formControl}
-            >
-              <FormLabel component="legend">Make a choice</FormLabel>
-              <RadioGroup
-                aria-label="My Team"
-                name="myTeam"
-                className={classes.group}
-                value={selection}
-                onChange={(event, value) => onTeamSelected(value)}
+            <div>
+              <FormControl
+                component="fieldset"
+                required
+                className={classes.formControl}
               >
-                <FormControlLabel
-                  value={team1}
-                  control={<Radio color="primary" />}
-                  label={team1}
-                />
-                <FormControlLabel
-                  value={team2}
-                  control={<Radio color="primary" />}
-                  label={team2}
-                />
-              </RadioGroup>
-            </FormControl>
+                <FormLabel component="legend">Make a choice</FormLabel>
+                <RadioGroup
+                  aria-label="My Team"
+                  name="myTeam"
+                  className={classes.group}
+                  value={selection}
+                  onChange={(event, value) => onTeamSelected(value)}
+                  disabled
+                >
+                  <FormControlLabel
+                    value={team1}
+                    control={<Radio color="primary" />}
+                    label={team1}
+                    disabled={isVoting}
+                  />
+                  <FormControlLabel
+                    value={team2}
+                    control={<Radio color="primary" />}
+                    label={team2}
+                    disabled={isVoting}
+                  />
+                </RadioGroup>
+              </FormControl>
+              {isVoting ? <CircularProgress size={30} /> : null}
+            </div>
           ) : (
             <Typography>
               {isPlayer

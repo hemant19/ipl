@@ -32,7 +32,7 @@ export function getMatches() {
       docs =>
         docs && docs.length !== 0
           ? docs
-              .map(doc => ({ [doc.id]: doc.data() }))
+              .map(doc => ({ [doc.id]: { ...doc.data(), isVoting: false } }))
               .reduce((acc = {}, doc) => {
                 return doc ? { ...acc, ...doc } : acc;
               })
