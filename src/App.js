@@ -13,8 +13,10 @@ import Snackbar from 'material-ui/Snackbar';
 import Button from 'material-ui/Button';
 
 import Header from './Header';
-import Home from './Home';
-import Login from './Login';
+import asyncComponent from './AsyncComponent';
+
+const AsyncHome = asyncComponent(() => import('./Home'));
+const AsyncLogin = asyncComponent(() => import('./Login'));
 
 class App extends Component {
   constructor() {
@@ -35,8 +37,6 @@ class App extends Component {
     });
 
     auth.onAuthStateChanged(this.handleOnLogin);
-
-    setUpMessaging(this.handleError);
   }
 
   componentWillMount() {
@@ -45,6 +45,15 @@ class App extends Component {
 
   openUpdateBar = () => {
     this.openSnackBar('New Version Available', 'reload');
+  };
+
+  votingClosed = matchId => {
+    this.setState(prev => ({
+      matches: {
+        ...prev.matches,
+        [matchId]: { ...prev.matches[matchId], votingClosed: true }
+      }
+    }));
   };
 
   handleOnLogin = user => {
@@ -56,14 +65,22 @@ class App extends Component {
           this.setState({ matches });
         });
 
-        getUserRoles(user.uid).then(user => {
-          this.setState(prev => ({
-            user: {
-              ...prev.user,
-              ...user
-            }
-          }));
-        });
+        getUserRoles(user.uid)
+          .then(user =>
+            this.setState(prev => ({
+              user: {
+                ...prev.user,
+                ...user
+              }
+            }))
+          )
+          .then(() => {
+            setUpMessaging(
+              this.state.user,
+              this.handleError,
+              this.votingClosed
+            );
+          });
       }
     } else {
       this.setState({ user: null });
@@ -130,7 +147,7 @@ class App extends Component {
               path="/(home)?"
               exact
               component={() => (
-                <Home
+                <AsyncHome
                   matches={this.state.matches}
                   onError={this.handleError}
                   onMatchListUpdated={this.onMatchListUpdated}
@@ -138,7 +155,7 @@ class App extends Component {
                 />
               )}
             />
-            <Route path="/login" exact component={Login} />
+            <Route path="/login" exact component={AsyncLogin} />
             <Route path="/matches/:matchId" component={MatchVotes} />
 
             <Snackbar

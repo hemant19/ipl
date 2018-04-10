@@ -2,7 +2,7 @@ import { firebase } from '@firebase/app';
 import '@firebase/firestore';
 import '@firebase/auth';
 import '@firebase/messaging';
-import { config } from './config/firebase';
+import { config, VAPID_KEY } from './config/firebase';
 
 firebase.initializeApp(config);
 let store = firebase.firestore();
@@ -15,7 +15,8 @@ firebase
   });
 
 export const auth = firebase.auth();
-export const messaging = firebase.messaging();
+const messaging = firebase.messaging();
+messaging.usePublicVapidKey(VAPID_KEY);
 
 export function getMatches() {
   const yesterday = new Date(Date.now() - 100000000);
@@ -159,25 +160,70 @@ export function getVoteDetails(matchId) {
   );
 }
 
-export function setUpMessaging(handleError) {
+function updateUIForPushPermissionRequired(showMessage) {
+  return showMessage({
+    message: "You won't be able to see the notifications!"
+  });
+}
+
+function updateUIForPushEnabled(showMessage) {
+  return showMessage({
+    message: 'Push Notifications Enabled'
+  });
+}
+
+export function setUpMessaging(user, showMessage, votingClose) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-    console.log('Setting up messaging');
-    messaging
-      .requestPermission()
-      .then(data => {
-        return messaging.getToken();
-      })
-      .catch(err => {
-        handleError({
-          message: "You won't be able to see the notifications!"
-        });
-      })
-      .then(currentToken => {
-        return saveToken(currentToken);
+    if (!user.notificationToken) {
+      messaging.requestPermission().then(() => {
+        messaging
+          .getToken()
+          .then(currentToken => {
+            if (currentToken) {
+              saveToken(user, currentToken);
+              updateUIForPushEnabled(showMessage);
+            } else {
+              console.log(
+                'No Instance ID token available. Request permission to generate one.'
+              );
+              updateUIForPushPermissionRequired(showMessage);
+            }
+          })
+          .catch(function(err) {
+            console.error('An error occurred while retrieving token. ', err);
+          });
       });
+    }
+
+    messaging.onTokenRefresh(function() {
+      messaging
+        .getToken()
+        .then(function(refreshedToken) {
+          console.log('Token refreshed.');
+          saveToken(user, refreshedToken);
+        })
+        .catch(function(err) {
+          console.error('Unable to retrieve refreshed token ', err);
+        });
+    });
+
+    messaging.onMessage(payload => {
+      if (payload && payload.type) {
+        if (payload.type === 'VOTING_CLOSE') {
+          if (votingClose) votingClose(payload.matchId);
+        } else {
+          showMessage({
+            message: payload.data.body
+          });
+        }
+      }
+    });
   }
 }
 
-export function saveToken(currentToken) {
-  console.log('TODO: // save token => ' + currentToken);
+export function saveToken(user, currentToken) {
+  return store
+    .collection('users')
+    .doc(user.uid)
+    .update({ notificationToken: currentToken });
 }
