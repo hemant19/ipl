@@ -33,8 +33,8 @@ function addUserRoles() {
 }
 
 function sendNotification() {
-  const fcmID= 'ddxy8IA2EFg:APA91bH2gBrEQVaIBqu4gQ41Sjigwn9-D2JPN-B-ZXrVBETFQ4hHO6JWr9jyzh7WPEZ8ZrPzakBLkG7Kp9pFQMqt6bj7YnImMYo-ti9zt3zWF3EJ-e3Wbw6PPr32jnem84Bh9hwSMgz-';
-  return admin.messaging().sendToDevice(fcmID, {data: {title:'Test', body: 'Wow it worked!'}})
+  const fcmID= 'ekmEZmUo2fA:APA91bFRQ-cVYFBsAIFli6lo7P86RYmvTcih8-lhqckXJzWNwUDKzTpKbOXZSL5ANmQ8au_vv6AVPWWyXLDoCQYCnESUmAHVIoz-b_AhA_speq3QdfuQyYUndgxF-dM4elHEQQJ9VKJU';
+  return admin.messaging().sendToDevice(fcmID, {data: {title:'Test Notification', body: 'Myank! Pull request!'}})
 }
 
 sendNotification();

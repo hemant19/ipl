@@ -98,7 +98,7 @@ function Match({
             </Typography>
           )}
           <CardActions>
-            {votingClosed ? (
+            {votingClosed || isAdmin ? (
               <Button size="small" onClick={handleViewSelections(matchId)}>
                 View selection
               </Button>

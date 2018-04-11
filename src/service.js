@@ -126,10 +126,10 @@ export function getMatch(matchId) {
     .then(snap => snap.data());
 }
 
-export function getVoteDetails(matchId) {
+export function getVoteDetails(isAdmin, matchId) {
   return getMatch(matchId).then(
     match =>
-      match && match.votingClosed
+      match && (match.votingClosed || isAdmin)
         ? store
             .collection('votes')
             .doc(matchId)

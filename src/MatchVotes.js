@@ -38,8 +38,9 @@ class MatchVotes extends React.Component {
   }
 
   componentDidMount() {
-    const { match } = this.props;
-    getVoteDetails(match.params.matchId).then(details => {
+    const { match, user } = this.props;
+    const isAdmin = user && user.role && user.role.admin;
+    getVoteDetails(isAdmin, match.params.matchId).then(details => {
       this.setState({ details });
     });
   }

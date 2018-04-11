@@ -156,7 +156,12 @@ class App extends Component {
               )}
             />
             <Route path="/login" exact component={AsyncLogin} />
-            <Route path="/matches/:matchId" component={MatchVotes} />
+            <Route
+              path="/matches/:matchId"
+              component={props => (
+                <MatchVotes {...props} user={this.state.user} />
+              )}
+            />
 
             <Snackbar
               anchorOrigin={{
