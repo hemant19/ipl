@@ -2,7 +2,7 @@
   "short_name": "IPL 2018",
   "name": "IPL 2018",
   "start_url": "/home",
-  "display": "standalone",
+  "display": "browser",
   "theme_color": "#b71c1c",
   "background_color": "#ffffff",
   "gcm_sender_id": "103953800507",
