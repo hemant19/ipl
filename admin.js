@@ -33,12 +33,15 @@ function addUserRoles() {
 }
 
 function sendNotification() {
+  const title = 'Match Update';
+  const body = 'RR 157/3(17)';
+
   admin.firestore().collection('users').get().then(snapshot => {
     snapshot.docs.map(doc => doc.data()).forEach(user => {
       if (user.notificationToken) {
         console.log('sending to ' + user.name);
         admin.messaging().sendToDevice(user.notificationToken, {
-          data: { title: 'Test Notification', body: 'We have notifications!' }
+          data: { title, body }
         }).then(() =>
           console.log('Sent to ' + user.name)
         ).catch(err => {

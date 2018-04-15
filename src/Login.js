@@ -4,12 +4,19 @@ import { firebase } from '@firebase/app';
 import { withRouter } from 'react-router-dom';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
+function getSignInFlow() {
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    return 'popup';
+  }
+  return 'redirect';
+}
+
 function Login({ history }) {
   const uiConfig = {
-    signInFlow: 'redirect',
+    signInFlow: getSignInFlow(),
     signInSuccessUrl: '/',
     callbacks: {
-      signInSuccessUrl: (currentUser, credential, redirectUrl) => {
+      signInSuccess: (currentUser, credential, redirectUrl) => {
         history.push('/');
         return false;
       }
