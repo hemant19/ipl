@@ -75,7 +75,7 @@ const notification = (
       return {
         ...state,
         open: true,
-        action: action,
+        action: action.action,
         message: action.message
       };
     case HIDE_NOTIFICATION:
