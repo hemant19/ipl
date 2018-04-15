@@ -8,12 +8,6 @@ function Login({ history }) {
   const uiConfig = {
     signInFlow: 'redirect',
     signInSuccessUrl: '/',
-    callbacks: {
-      signInSuccess: (currentUser, credential, redirectUrl) => {
-        history.push('/');
-        return false;
-      }
-    },
     signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
   };
   return (
