@@ -1,120 +1,53 @@
 import React, { Component } from 'react';
-import {
-  getMatches,
-  getMatchesWithVotes,
-  getUserRoles,
-  auth,
-  setUpMessaging
-} from './service';
+import { auth } from './api';
 import MatchVotes from './MatchVotes';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 import Snackbar from 'material-ui/Snackbar';
 import Button from 'material-ui/Button';
+import { connect } from 'react-redux';
 
 import Header from './Header';
+import Home from './Home';
 import asyncComponent from './AsyncComponent';
 
-const AsyncHome = asyncComponent(() => import('./Home'));
+import {
+  loginUser,
+  logoutUser,
+  recieveMatches,
+  hideNotification,
+  notify
+} from './actions';
+
 const AsyncLogin = asyncComponent(() => import('./Login'));
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      matches: {},
-      user: undefined,
-      snackbar: {
-        open: false,
-        message: ''
-      }
-    };
-  }
-
   componentDidMount() {
-    getMatches().then(matches => {
-      this.setState({ matches });
-    });
-
     auth.onAuthStateChanged(this.handleOnLogin);
+    this.props.dispatch(recieveMatches());
   }
 
   componentWillMount() {
-    window.onServiceWorkerUpdated(this.openUpdateBar);
+    window.onServiceWorkerUpdated(this.notifyServiceWorkerUpdated);
   }
 
-  openUpdateBar = () => {
-    this.openSnackBar('New Version Available', 'reload');
-  };
-
-  votingClosed = matchId => {
-    this.setState(prev => ({
-      matches: {
-        ...prev.matches,
-        [matchId]: { ...prev.matches[matchId], votingClosed: true }
-      }
-    }));
+  notifyServiceWorkerUpdated = () => {
+    this.props.dispatch(notify('New Version Available', 'reload'));
   };
 
   handleOnLogin = user => {
     if (user) {
-      if (!this.state.user) {
-        this.setState({ user });
-
-        getMatchesWithVotes(user.uid).then(matches => {
-          this.setState({ matches });
-        });
-
-        getUserRoles(user.uid)
-          .then(user =>
-            this.setState(prev => ({
-              user: {
-                ...prev.user,
-                ...user
-              }
-            }))
-          )
-          .then(() => {
-            setUpMessaging(
-              this.state.user,
-              this.handleError,
-              this.votingClosed
-            );
-          });
+      if (!this.props.user) {
+        const { displayName, uid } = user;
+        this.props.dispatch(loginUser({ displayName, uid }));
       }
     } else {
-      this.setState({ user: null });
+      this.props.dispatch(logoutUser());
     }
   };
 
-  onMatchListUpdated = list => {
-    this.setState(prev => ({ matches: { ...prev.matches, ...list } }));
-  };
-
-  handleError = error => {
-    this.openSnackBar(error.message);
-  };
-
-  closeSnackbar = () => {
-    this.setState({
-      snackbar: {
-        open: false,
-        message: '',
-        action: null,
-        vertical: 'bottom',
-        horizontal: 'right'
-      }
-    });
-  };
-
-  openSnackBar = (message, action, vertical = 'bottom') => {
-    this.setState({
-      snackbar: { open: true, message, action, vertical, horizontal: 'right' }
-    });
-  };
-
-  snackBarAction = () => {
-    if (this.state.snackbar.action === 'reload')
+  snackBarAction = action => {
+    if (action === 'reload')
       return (
         <Button
           color="secondary"
@@ -131,49 +64,35 @@ class App extends Component {
   };
 
   render() {
+    const { user, notification } = this.props;
     return (
       <div>
         <BrowserRouter>
           <div>
             <Header
-              loggedIn={!!this.state.user}
+              loggedIn={!!user}
               onLogout={e => {
                 auth.signOut().then(() => {
-                  window.location.reload();
+                  this.props.dispatch(logoutUser());
                 });
               }}
             />
-            <Route
-              path="/(home)?"
-              exact
-              component={() => (
-                <AsyncHome
-                  matches={this.state.matches}
-                  onError={this.handleError}
-                  onMatchListUpdated={this.onMatchListUpdated}
-                  user={this.state.user}
-                />
-              )}
-            />
+            <Route path="/(home)?" exact component={Home} />
             <Route path="/login" exact component={AsyncLogin} />
             <Route
               path="/matches/:matchId"
-              component={props => (
-                <MatchVotes {...props} user={this.state.user} />
-              )}
+              component={props => <MatchVotes {...props} user={user} />}
             />
 
             <Snackbar
               anchorOrigin={{
-                vertical: this.state.snackbar.vertical,
-                horizontal: this.state.snackbar.horizontal
+                vertical: notification.vertical,
+                horizontal: notification.horizontal
               }}
-              open={this.state.snackbar.open}
-              onClose={this.closeSnackbar}
-              message={
-                <span id="message-id">{this.state.snackbar.message}</span>
-              }
-              action={this.snackBarAction()}
+              open={notification.open}
+              onClose={hideNotification}
+              message={<span id="message-id">{notification.message}</span>}
+              action={this.snackBarAction(notification.action)}
             />
           </div>
         </BrowserRouter>
@@ -182,4 +101,6 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(App);

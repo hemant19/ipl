@@ -4,7 +4,7 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
-import { getVoteDetails } from './service';
+import { getVoteDetails } from './api';
 
 const styles = theme => ({
   root: {

@@ -9,7 +9,10 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-firebaseui": "^1.2.3",
-    "react-router-dom": "^4.2.2"
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "@firebase/app-types": "^0.1.2",
@@ -17,7 +20,8 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.0.4",
     "prettier": "^1.11.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "redux-devtools-extension": "^2.13.2"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [

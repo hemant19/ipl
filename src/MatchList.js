@@ -1,59 +1,46 @@
 import React from 'react';
 import Match from './Match';
-import { vote, closeVoting } from './service';
+import { vote, closeVoting } from './actions';
+import { connect } from 'react-redux';
 
-const handleTeamSelected = (user, onMatchUpdated, sendMessage) => (
-  id,
-  match
-) => selection => {
+import { LinearProgress } from 'material-ui/Progress';
+
+const handleTeamSelected = (user, dispatch) => (id, match) => selection => {
   if (user) {
-    onMatchUpdated(id, { ...match, selection, isVoting: true });
-    vote(user, id, selection)
-      .then(() => {
-        sendMessage({
-          message: 'Your choice is recorded.'
-        });
-        onMatchUpdated(id, { ...match, selection, isVoting: false });
-      })
-      .catch(() => {
-        sendMessage({
-          message: 'Some error occurred! Please report'
-        });
-      });
-  } else {
-    sendMessage({
-      message: 'Please login first!'
-    });
+    dispatch(vote(user, id, selection));
   }
 };
 
-const handleVoteClosing = (user, onMatchUpdated) => (id, match) => e => {
-  return closeVoting(user, id).then(() =>
-    onMatchUpdated(id, { ...match, votingClosed: true })
-  );
+const handleVoteClosing = dispatch => id => e => {
+  return dispatch(closeVoting(id));
 };
 
-export default function MatchList(props) {
-  const { matches, onMatchUpdated, user, onError } = props;
-  const handler = handleTeamSelected(user, onMatchUpdated, onError);
-  const votingClosedHandler = handleVoteClosing(user, onMatchUpdated);
+function MatchList({ matchList, user, dispatch }) {
+  const handler = handleTeamSelected(user, dispatch);
+  const votingClosedHandler = handleVoteClosing(dispatch);
   return (
     <div>
-      {Object.entries(matches)
-        .map(match => {
-          if (!user || match.votingClosed) match.votingClosed = true;
-          return match;
-        })
-        .map(([id, match]) => (
-          <Match
-            key={id}
-            matchData={{ ...match, matchId: id }}
-            onTeamSelected={handler(id, match)}
-            onMatchVotingClosed={votingClosedHandler(id, match)}
-            isAdmin={user && user.role && user.role.admin}
-            isPlayer={user && user.role && user.role.player}
-          />
-        ))}
+      {Object.entries(matchList).length !== 0 ? (
+        Object.entries(matchList)
+          .map(match => {
+            if (!user || match.votingClosed) match.votingClosed = true;
+            return match;
+          })
+          .map(([id, match]) => (
+            <Match
+              key={id}
+              matchData={{ ...match, matchId: id }}
+              onTeamSelected={handler(id, match)}
+              onMatchVotingClosed={votingClosedHandler(id, match)}
+              isAdmin={user && user.role && user.role.admin}
+              isPlayer={user && user.role && user.role.player}
+            />
+          ))
+      ) : (
+        <LinearProgress />
+      )}
     </div>
   );
 }
+
+export default connect(state => state)(MatchList);

@@ -33,8 +33,16 @@ function addUserRoles() {
 }
 
 function sendNotification() {
-  const fcmID= 'ekmEZmUo2fA:APA91bFRQ-cVYFBsAIFli6lo7P86RYmvTcih8-lhqckXJzWNwUDKzTpKbOXZSL5ANmQ8au_vv6AVPWWyXLDoCQYCnESUmAHVIoz-b_AhA_speq3QdfuQyYUndgxF-dM4elHEQQJ9VKJU';
-  return admin.messaging().sendToDevice(fcmID, {data: {title:'Test Notification', body: 'Myank! Pull request!'}})
+  admin.firestore().collection('users').get().then(snapshot => {
+    snapshot.docs.map(doc => doc.data()).forEach(user => {
+      if (user.notificationToken && user.name && user.name.includes('Hemant')) {
+        console.log("Sent token to" + user.name);
+        admin.messaging().sendToDevice(user.notificationToken, {
+          data: { title: 'Test Notification', body: 'Score notification KXIP - 155/9(19.1)' }
+        });
+      }
+    })
+  })
 }
 
 sendNotification();
