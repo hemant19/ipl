@@ -1,7 +1,6 @@
 import { firebase } from '@firebase/app';
 import '@firebase/firestore';
 import '@firebase/auth';
-import '@firebase/messaging';
 import { config } from './config/firebase';
 
 firebase.initializeApp(config);
@@ -34,7 +33,7 @@ export const postVote = (user, matchId, team) => {
 
 export function fetchMatches() {
   const yesterday = new Date(Date.now() - 100000000);
-  const dayAftertomorrow = new Date(Date.now() + 300000000);
+  const dayAftertomorrow = new Date(Date.now() + 180000000);
 
   return store
     .collection('matches')
@@ -125,4 +124,17 @@ export function getVoteDetails(isAdmin, matchId) {
             team2Players: []
           }
   );
+}
+
+export function saveToken(token) {
+  if (auth.currentUser) {
+    return store
+      .collection('users')
+      .doc(auth.currentUser.uid)
+      .update({
+        notificationToken: token
+      });
+  }
+
+  return new Promise((res, rej) => rej());
 }

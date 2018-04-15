@@ -90,7 +90,7 @@ class App extends Component {
                 horizontal: notification.horizontal
               }}
               open={notification.open}
-              onClose={hideNotification}
+              onClose={() => this.props.dispatch(hideNotification())}
               message={<span id="message-id">{notification.message}</span>}
               action={this.snackBarAction(notification.action)}
             />

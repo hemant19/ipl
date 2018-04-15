@@ -35,11 +35,16 @@ function addUserRoles() {
 function sendNotification() {
   admin.firestore().collection('users').get().then(snapshot => {
     snapshot.docs.map(doc => doc.data()).forEach(user => {
-      if (user.notificationToken && user.name && user.name.includes('Hemant')) {
-        console.log("Sent token to" + user.name);
+      if (user.notificationToken) {
+        console.log('sending to ' + user.name);
         admin.messaging().sendToDevice(user.notificationToken, {
-          data: { title: 'Test Notification', body: 'Score notification KXIP - 155/9(19.1)' }
-        });
+          data: { title: 'Test Notification', body: 'We have notifications!' }
+        }).then(() =>
+          console.log('Sent to ' + user.name)
+        ).catch(err => {
+          console.log('Not sent to' + user.name);
+          console.error(err);
+        })
       }
     })
   })

@@ -15,6 +15,7 @@ import {
   postCloseVoting,
   fetchUserRoles
 } from '../api';
+import { init } from '../messaging';
 
 export const addMatch = (id, match) => ({
   type: ADD_MATCH,
@@ -115,6 +116,7 @@ export const loginUser = user => (dispatch, getState) => {
   });
   dispatch(recieveUserRoles(user));
   dispatch(recieveUserChoices({ user }));
+  init();
 };
 
 const recieveUserRoles = user => dispatch => {
