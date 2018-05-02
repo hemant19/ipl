@@ -1,46 +1,69 @@
 import React from 'react';
 import Match from './Match';
-import { vote, closeVoting } from './actions';
+import { vote, closeVoting, declareWinner } from './actions';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { LinearProgress } from 'material-ui/Progress';
+import { withStyles } from 'material-ui/styles';
 
-const handleTeamSelected = (user, dispatch) => (id, match) => selection => {
+const handleTeamSelected = (user, dispatch) => id => selection => {
   if (user) {
     dispatch(vote(user, id, selection));
   }
 };
 
-const handleVoteClosing = dispatch => id => e => {
+const handleVoteClosing = dispatch => id => () => {
   return dispatch(closeVoting(id));
 };
 
-function MatchList({ matchList, user, dispatch }) {
-  const handler = handleTeamSelected(user, dispatch);
-  const votingClosedHandler = handleVoteClosing(dispatch);
+const handleMatchWinnerSelected = dispatch => id => winner => {
+  return dispatch(declareWinner(id, winner));
+};
+
+const styles = {
+  match: {
+    margin: '10px'
+  }
+};
+
+function MatchList({classes, history, matchList, user, dispatch}) {
+  const isAdmin = user && user.role && user.role.admin;
+  const isPlayer = user && user.role && user.role.player;
+
+  const votingHandler = (id, closed) => !closed && isPlayer ? handleTeamSelected(user, dispatch)(id) : null;
+  const closeVotingHandler = (id, closed) => !closed && isAdmin ? handleVoteClosing(dispatch)(id) : null;
+  const matchWinnerHandler = (id, closed) => closed && isAdmin ? handleMatchWinnerSelected(dispatch)(id) : null;
+  const viewDetailsHandler = (id, closed) => closed || isAdmin ? () => history.push(`/matches/${id}`) : null;
+
+  if (Object.entries(matchList).length === 0)
+    return <LinearProgress/>;
+
   return (
     <div>
-      {Object.entries(matchList).length !== 0 ? (
+      {
         Object.entries(matchList)
-          .map(match => {
-            if (!user || match.votingClosed) match.votingClosed = true;
-            return match;
+          .map(([id, match]) => {
+            return {
+              ...match,
+              matchId: id,
+              vote: match.selection,
+              onVote: votingHandler(id, match.votingClosed),
+              onCloseVoting: closeVotingHandler(id, match.votingClosed),
+              onViewDetails: viewDetailsHandler(id, match.votingClosed),
+              onMatchWinnerSelected: matchWinnerHandler(id, match.votingClosed)
+            }
           })
-          .map(([id, match]) => (
+          .map(match => (
             <Match
-              key={id}
-              matchData={{ ...match, matchId: id }}
-              onTeamSelected={handler(id, match)}
-              onMatchVotingClosed={votingClosedHandler(id, match)}
-              isAdmin={user && user.role && user.role.admin}
-              isPlayer={user && user.role && user.role.player}
+              key={match.matchId}
+              {...match}
+              className={classes.match}
             />
           ))
-      ) : (
-        <LinearProgress />
-      )}
+      }
     </div>
   );
 }
 
-export default connect(state => state)(MatchList);
+export default connect(state => state)(withRouter(withStyles(styles)(MatchList)));

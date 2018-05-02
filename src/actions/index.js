@@ -13,7 +13,8 @@ import {
   postVote,
   fetchUserVote,
   postCloseVoting,
-  fetchUserRoles
+  fetchUserRoles,
+  postWinner
 } from '../api';
 import { init } from '../messaging';
 
@@ -38,7 +39,7 @@ export const recieveMatches = () => (dispatch, getState) =>
       });
       return response;
     })
-    .then(matches => dispatch(recieveUserChoices({ matches })));
+    .then(matches => dispatch(recieveUserChoices({matches})));
 
 const recieveUserChoices = data => (dispatch, getState) => {
   const state = getState();
@@ -51,7 +52,7 @@ const recieveUserChoices = data => (dispatch, getState) => {
         dispatch({
           type: UPDATE_MATCH,
           id: matchId,
-          match: { selection: team }
+          match: {selection: team}
         })
       )
     );
@@ -64,7 +65,7 @@ export const closeVoting = matchId => dispatch => {
       dispatch({
         type: UPDATE_MATCH,
         id: matchId,
-        match: { votingClosed: true }
+        match: {votingClosed: true}
       })
     )
     .catch(() =>
@@ -76,7 +77,7 @@ export const vote = (user, matchId, team) => dispatch => {
   dispatch({
     type: UPDATE_MATCH,
     id: matchId,
-    match: { selection: team, isVoting: true }
+    match: {selection: team, isVoting: true}
   });
 
   return postVote(user, matchId, team)
@@ -84,7 +85,7 @@ export const vote = (user, matchId, team) => dispatch => {
       dispatch({
         type: UPDATE_MATCH,
         id: matchId,
-        match: { selection: team, isVoting: false }
+        match: {selection: team, isVoting: false}
       });
       dispatch(notify('Your choice has been recorded!'));
     })
@@ -92,7 +93,34 @@ export const vote = (user, matchId, team) => dispatch => {
       dispatch({
         type: UPDATE_MATCH,
         id: matchId,
-        match: { isVoting: false }
+        match: {isVoting: false}
+      });
+
+      dispatch(notify('Some error occurred.Please reload', 'reload'));
+    });
+};
+
+export const declareWinner = (matchId, team) => dispatch => {
+  dispatch({
+    type: UPDATE_MATCH,
+    id: matchId,
+    match: {winner: team, isVoting: true}
+  });
+
+  return postWinner(matchId, team)
+    .then(() => {
+      dispatch({
+        type: UPDATE_MATCH,
+        id: matchId,
+        match: {winner: team, isVoting: false}
+      });
+      dispatch(notify('Your choice has been recorded!'));
+    })
+    .catch(() => {
+      dispatch({
+        type: UPDATE_MATCH,
+        id: matchId,
+        match: {isVoting: false}
       });
 
       dispatch(notify('Some error occurred.Please reload', 'reload'));
@@ -115,7 +143,7 @@ export const loginUser = user => (dispatch, getState) => {
     user
   });
   dispatch(recieveUserRoles(user));
-  dispatch(recieveUserChoices({ user }));
+  dispatch(recieveUserChoices({user}));
   init();
 };
 

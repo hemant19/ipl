@@ -1,117 +1,151 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Card, { CardContent, CardActions } from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-import Radio, { RadioGroup } from 'material-ui/Radio';
-import { FormLabel, FormControl, FormControlLabel } from 'material-ui/Form';
-import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup
+} from 'material-ui';
 import { CircularProgress } from 'material-ui/Progress';
+import { withStyles } from 'material-ui/styles';
+import classNames from 'classnames';
 
 const styles = theme => ({
-  card: {
-    minWidth: 275,
-    margin: '10px'
-  },
-  title: {
-    marginBottom: 16,
+  root: {},
+  date: {
     fontSize: 14,
     color: theme.palette.text.secondary
   },
-  pos: {
-    marginBottom: 12,
+  location: {
     color: theme.palette.text.secondary
   }
 });
 
-function Match({
-  classes,
-  onTeamSelected,
-  history,
-  onMatchVotingClosed,
-  isAdmin,
-  isPlayer,
-  matchData
-}) {
-  const {
-    matchId,
-    team1,
-    team2,
-    location,
-    selection,
-    votingClosed,
-    date,
-    isVoting
-  } = matchData;
-
-  const handleViewSelections = matchId => e => {
-    history.push(`/matches/${matchId}`);
-  };
-
+const renderVotingForm = (team1, team2, vote, isVoting, onVote, classes) => {
   return (
     <div>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.title}>{date.toString()}</Typography>
-          <Typography variant="headline" component="h2">
-            {team1} vs {team2}
-          </Typography>
-          <Typography className={classes.pos}>{location}</Typography>
-
-          {!votingClosed && isPlayer ? (
-            <div>
-              <FormControl
-                component="fieldset"
-                required
-                className={classes.formControl}
-              >
-                <FormLabel component="legend">Make a choice</FormLabel>
-                <RadioGroup
-                  aria-label="My Team"
-                  name="myTeam"
-                  className={classes.group}
-                  value={selection}
-                  onChange={(event, value) => onTeamSelected(value)}
-                  disabled
-                >
-                  <FormControlLabel
-                    value={team1}
-                    control={<Radio color="primary" />}
-                    label={team1}
-                    disabled={isVoting}
-                  />
-                  <FormControlLabel
-                    value={team2}
-                    control={<Radio color="primary" />}
-                    label={team2}
-                    disabled={isVoting}
-                  />
-                </RadioGroup>
-              </FormControl>
-              {isVoting ? <CircularProgress size={30} /> : null}
-            </div>
-          ) : (
-            <Typography>
-              {isPlayer
-                ? `The voting has closed. Your selection - ${selection}`
-                : ''}
-            </Typography>
-          )}
-          <CardActions>
-            {votingClosed || isAdmin ? (
-              <Button size="small" onClick={handleViewSelections(matchId)}>
-                View selection
-              </Button>
-            ) : null}
-            {isAdmin && !votingClosed ? (
-              <Button size="small" onClick={() => onMatchVotingClosed()}>
-                Close Voting
-              </Button>
-            ) : null}
-          </CardActions>
-        </CardContent>
-      </Card>
+      <FormControl
+        component="fieldset"
+        required
+        className={classes.formControl}
+      >
+        <FormLabel component="legend">Make a choice</FormLabel>
+        <RadioGroup
+          aria-label="My Team"
+          name="myTeam"
+          className={classes.group}
+          value={vote}
+          onChange={(event, value) => onVote(value)}
+          disabled
+        >
+          <FormControlLabel
+            value={team1}
+            control={<Radio color="primary"/>}
+            label={team1}
+            disabled={isVoting}
+          />
+          <FormControlLabel
+            value={team2}
+            control={<Radio color="primary"/>}
+            label={team2}
+            disabled={isVoting}
+          />
+        </RadioGroup>
+      </FormControl>
+      {isVoting ? <CircularProgress size={30}/> : null}
     </div>
   );
+};
+
+function renderVote(vote) {
+  return vote ?
+    <Typography component="p">Your Vote - <b>{vote}</b></Typography> :
+    <Typography component="p">Hard Luck Mate!</Typography>;
 }
-export default withRouter(withStyles(styles)(Match));
+
+function renderDetailsButton(onViewDetails) {
+  return (
+    <Button onClick={onViewDetails} variant="raised">
+      View Details
+    </Button>
+  );
+}
+
+function renderCloseVotingButton(onVotingClose) {
+  return (
+    <Button onClick={onVotingClose} color="primary" variant="raised">
+      Close Voting
+    </Button>
+  );
+}
+
+function renderWinner(winner) {
+  return winner ?
+    <Typography component="p">Match Winner - <b>{winner}</b></Typography> :
+    null;
+}
+
+const Match = ({
+                 classes,
+                 className,
+                 team1,
+                 team2,
+                 vote,
+                 winner,
+                 isVoting,
+                 date,
+                 location,
+                 onVote,
+                 onMatchWinnerSelected,
+                 onCloseVoting,
+                 onViewDetails
+               }) => {
+  const votingEnabled = !!onVote;
+  const matchWinnerSelectionEnabled = !!onMatchWinnerSelected;
+  const closeVotingEnabled = !!onCloseVoting;
+  const viewDetailsEnabled = !!onViewDetails;
+
+  return (
+    <Card className={classNames(classes.root, className)}>
+      <CardContent>
+        <Typography className={classes.date} component="p">{date.toString()}</Typography>
+        <Typography variant="headline" component="h2">
+          {team1} vs {team2}
+        </Typography>
+        <Typography className={classes.location}>{location}</Typography>
+        <br/>
+
+        {votingEnabled ? renderVotingForm(team1, team2, vote, isVoting, onVote, classes) : renderVote(vote)}
+        {renderWinner(winner)}
+        {matchWinnerSelectionEnabled ? renderVotingForm(team1, team2, winner, isVoting, onMatchWinnerSelected, classes) : null}
+        <CardActions>
+          {viewDetailsEnabled ? renderDetailsButton(onViewDetails) : null}
+          {closeVotingEnabled ? renderCloseVotingButton(onCloseVoting) : null}
+        </CardActions>
+      </CardContent>
+    </Card>
+  );
+};
+
+Match.propTypes = {
+  classes: PropTypes.object.isRequired,
+  team1: PropTypes.string.isRequired,
+  team2: PropTypes.string.isRequired,
+  vote: PropTypes.string,
+  isVoting: PropTypes.bool,
+  date: PropTypes.instanceOf(Date),
+  location: PropTypes.string.isRequired,
+  onVote: PropTypes.func,
+  onMatchWinnerSelected: PropTypes.func,
+  onCloseVoting: PropTypes.func,
+  onViewDetails: PropTypes.func,
+  className: PropTypes.string
+};
+
+export default withStyles(styles)(Match);
