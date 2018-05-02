@@ -8,6 +8,16 @@ let store = firebase.firestore();
 
 export const auth = firebase.auth();
 
+function logEvent(message) {
+  if (auth.currentUser) {
+    store.collection('events').add({
+      message,
+      postedBy: auth.currentUser.displayName,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+}
+
 export const postVote = (user, matchId, team) => {
   if (
     auth.currentUser &&
@@ -16,6 +26,7 @@ export const postVote = (user, matchId, team) => {
     matchId &&
     team
   ) {
+    logEvent(`${user.displayName} posted vote on ${matchId} as ${team}`);
     const votes = store.collection('votes').doc(matchId);
     return votes.set(
       {
@@ -33,6 +44,7 @@ export const postVote = (user, matchId, team) => {
 
 export function postWinner(id, winner) {
   if (id && winner) {
+    logEvent(`${auth.currentUser.displayName} declared winner on match ${id} as ${winner}`);
     return store.collection('matches').doc(id).update({
       winner
     });
@@ -86,6 +98,7 @@ export function fetchUserRoles(user) {
 }
 
 export function postCloseVoting(matchId) {
+  logEvent(`${auth.currentUser.displayName} closed match ${matchId}`);
   return store
     .collection('matches')
     .doc(matchId)
@@ -157,7 +170,7 @@ export function getUsers() {
 
       docs.forEach(user => {
         users.push({uid: user.id, ...user.data()});
-      })
+      });
 
       return users;
     });
