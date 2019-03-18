@@ -11,9 +11,9 @@ import {
   FormLabel,
   Radio,
   RadioGroup
-} from 'material-ui';
-import { CircularProgress } from 'material-ui/Progress';
-import { withStyles } from 'material-ui/styles';
+} from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core/LinearProgress';
+import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 const styles = theme => ({

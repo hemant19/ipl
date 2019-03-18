@@ -3,8 +3,8 @@ import { auth } from './api';
 import MatchVotes from './MatchVotes';
 
 import { BrowserRouter, Route } from 'react-router-dom';
-import Snackbar from 'material-ui/Snackbar';
-import Button from 'material-ui/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 
 import Header from './Header';

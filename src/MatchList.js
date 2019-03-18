@@ -4,8 +4,8 @@ import { vote, closeVoting, declareWinner } from './actions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { LinearProgress } from 'material-ui/Progress';
-import { withStyles } from 'material-ui/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { withStyles } from '@material-ui/core/styles';
 
 const handleTeamSelected = (user, dispatch) => id => selection => {
   if (user) {
