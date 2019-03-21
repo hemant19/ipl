@@ -15,10 +15,13 @@ const theme = createMuiTheme({
       main: '#b71c1c',
       dark: '#7f0000'
     }
-  }
+  },  
+  typography: {
+    useNextVariants: true,
+  },
 });
 
-//Hack to pass data to servie worker
+//Hack to pass data to service worker
 window.onServiceWorkerUpdated = onUpdate => {
   window.SWUpdated = onUpdate;
 };

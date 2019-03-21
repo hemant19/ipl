@@ -115,7 +115,7 @@ const Match = ({
     <Card className={classNames(classes.root, className)}>
       <CardContent>
         <Typography className={classes.date} component="p">{date.toString()}</Typography>
-        <Typography variant="headline" component="h2">
+        <Typography variant="h5" component="h2">
           {team1} vs {team2}
         </Typography>
         <Typography className={classes.location}>{location}</Typography>

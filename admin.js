@@ -4,12 +4,11 @@ var serviceAccount = require("./src/config/serviceAccount.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://ipl2018-c70d6.firebaseio.com"
+  databaseURL: "https://playipl2019.firebaseio.com"
 });
 
-
 function addMatches() {
-  var matches = require('./match.json');
+  var matches = require('./matches.json');
 
   matches.map(match =>
     admin.firestore().collection('matches').add({
@@ -53,4 +52,4 @@ function sendNotification() {
   })
 }
 
-sendNotification();
+addMatches()

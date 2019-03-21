@@ -110,7 +110,7 @@ class MatchVotes extends React.Component {
           </Grid>
           <Grid item xs={6}>
             <Paper>
-              <Typography variant="headline" className={classes.title}>
+              <Typography variant="h5" className={classes.title}>
                 {details.team1}
               </Typography>
               <List className={classes.root} subheader={<li />}>
@@ -124,7 +124,7 @@ class MatchVotes extends React.Component {
           </Grid>
           <Grid item xs={6}>
             <Paper>
-              <Typography variant="headline" className={classes.title}>
+              <Typography variant="h5" className={classes.title}>
                 {this.state.details.team2}
               </Typography>
               <List subheader={<li />}>

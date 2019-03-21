@@ -1,0 +1,374 @@
+[
+    {
+        "team1": "Chennai Super Kings (CSK)",
+        "team2": "Royal Challengers Bangalore (RCB)",
+        "location": "M.A.Chidambaram Chepauk Stadium, Chennai, Tamilnadu.",
+        "date": "2019-03-23T14:30:00.000Z"
+    },
+    {
+        "team1": "Kolkata Knight Riders (KKR)",
+        "team2": "Sun Risers Hyderabad (SRH)",
+        "location": "Eden Gardens Stadium Kolkata, West Bengal.",
+        "date": "2019-03-24T10:30:00.000Z"
+    },
+    {
+        "team1": "Mumbai Indians",
+        "team2": "Delhi Capitals",
+        "location": "Wankhede Stadium, Mumbai, Maharashtra.",
+        "date": "2019-03-24T14:30:00.000Z"
+    },
+    {
+        "team1": "Rajasthan Royals (RR)",
+        "team2": "Kings XI Punjab (KXIP)",
+        "location": "Jaipur",
+        "date": "2019-03-25T14:30:00.000Z"
+    },
+    {
+        "team1": "Delhi Capitals",
+        "team2": "Chennai Super Kings (CSK)",
+        "location": "Feroz Shah Kotla Stadium, Delhi",
+        "date": "2019-03-26T14:30:00.000Z"
+    },
+    {
+        "team1": "Kolkata Knight Riders (KKR)",
+        "team2": "Kings XI Punjab",
+        "location": "Eden Gardens Stadium, Kolkata",
+        "date": "2019-03-27T14:30:00.000Z"
+    },
+    {
+        "team1": "Royal Challengers Bangalore (RCB)",
+        "team2": "Mumbai Indians (MI)",
+        "location": "M.Chinnaswamy Stadium, Bengaluru",
+        "date": "2019-03-28T14:30:00.000Z"
+    },
+    {
+        "team1": "Sun Risers Hyderabad (SRH)",
+        "team2": "Rajasthan Royals (RR)",
+        "location": "RGI Stadium, Hyderabad",
+        "date": "2019-03-29T14:30:00.000Z"
+    },
+    {
+        "team1": "Kings XI Punjab",
+        "team2": "Mumbai Indians (MI)",
+        "location": "PCA Stadium, Mohali",
+        "date": "2019-03-30T10:30:00.000Z"
+    },
+    {
+        "team1": "Delhi Capitals",
+        "team2": "Kolkata Knight Riders (KKR)",
+        "location": "Feroz Shah Kotla Stadium, Delhi",
+        "date": "2019-03-30T14:30:00.000Z"
+    },
+    {
+        "team1": "Sun Risers Hyderabad (SRH)",
+        "team2": "Royal Challengers Bangalore (RCB)",
+        "location": "RGI Stadium, Hyderabad",
+        "date": "2019-03-31T10:30:00.000Z"
+    },
+    {
+        "team1": "Chennai",
+        "team2": "Rajasthan Royals (RR)",
+        "location": "M.A.Chidambaram Stadium, Chennai",
+        "date": "2019-03-31T14:30:00.000Z"
+    },
+    {
+        "team1": "Kings XI Punjab (KXIP)",
+        "team2": "Delhi Capitals (DC)",
+        "location": "Mohali",
+        "date": "2019-04-01T14:30:00.000Z"
+    },
+    {
+        "team1": "Rajasthan Royals (RR)",
+        "team2": "Royal Challengers Bangalore (RCB)",
+        "location": "Jaipur",
+        "date": "2019-04-02T14:30:00.000Z"
+    },
+    {
+        "team1": "Mumbai Indians",
+        "team2": "Chennai Super Kings",
+        "location": "Mumbai",
+        "date": "2019-04-03T14:30:00.000Z"
+    },
+    {
+        "team1": "Delhi",
+        "team2": "Sun Risers Hyderabad (SRH)",
+        "location": "Feroz Shah Kotla Stadium, Delhi",
+        "date": "2019-04-04T14:30:00.000Z"
+    },
+    {
+        "team1": "Royal Challengers Bangalore (RCB)",
+        "team2": "Kolkata Knight Riders (KKR)",
+        "location": " Bangalore",
+        "date": "2019-04-05T14:30:00.000Z"
+    },
+    {
+        "team1": "Kolkata Knight Riders (KKR)",
+        "team2": "Kings XI Punjab (KXIP)",
+        "location": "Eden Gardens Kolkata, West Bengal.",
+        "date": "2019-04-13T10:30:00.000Z"
+    },
+    {
+        "team1": "Royal Challengers Bangalore (RCB)",
+        "team2": "Delhi Daredevils (DD)",
+        "location": "Sheikh Zayed Cricket Stadium, Abu Dhabi.",
+        "date": "2019-04-13T14:30:00.000Z"
+    },
+    {
+        "team1": "Sun Risers Hyderabad (SRH)",
+        "team2": "Chennai Super Kings (CSK)",
+        "location": "R.G.I. Cricket Stadium, Hyderabad, Telangana.",
+        "date": "2019-04-14T10:30:00.000Z"
+    },
+    {
+        "team1": "Rajasthan Royals (RR)",
+        "team2": "Mumbai Indians (MI)",
+        "location": "Sawai Mansingh Stadium, Jaipur, Rajasthan",
+        "date": "2019-04-14T14:30:00.000Z"
+    },
+    {
+        "team1": "Delhi Capitals (DC)",
+        "team2": "Kings XI Punjab (KXIP)",
+        "location": "Feroz Shah Kotla Stadium Delhi",
+        "date": "2019-04-15T14:30:00.000Z"
+    },
+    {
+        "team1": "Mumbai Indians (MI)",
+        "team2": "Sun Risers Hyderabad (SRH)",
+        "location": "Wankhede Stadium Mumbai, Maharashtra.",
+        "date": "2019-04-16T14:30:00.000Z"
+    },
+    {
+        "team1": "Royal Challengers Bangalore (RCB)",
+        "team2": "Chennai Super Kings (CSK)",
+        "location": "M.Chinnaswamy Stadium, Bengaluru, Karnataka.",
+        "date": "2019-04-17T14:30:00.000Z"
+    },
+    {
+        "team1": "Sun Risers Hyderabad (SRH)",
+        "team2": "Kings XI Punjab (KXIP)",
+        "location": "R.G.I. Cricket Stadium, Hyderabad, Telangana.",
+        "date": "2019-04-18T14:30:00.000Z"
+    },
+    {
+        "team1": "Delhi Capitals (DC)",
+        "team2": "Kolkata Knight Riders (KKR)",
+        "location": "Feroz Shah Kotla Stadium Delhi",
+        "date": "2019-04-19T14:30:00.000Z"
+    },
+    {
+        "team1": "Chennai Super Kings (CSK)",
+        "team2": "Mumbai Indians (MI)",
+        "location": " M.A.Chidambaram Chepauk Stadium, Chennai, Tamilnadu.",
+        "date": "2019-04-20T10:30:00.000Z"
+    },
+    {
+        "team1": "Rajasthan Royals (RR)",
+        "team2": "Sun Risers Hyderabad (SRH)",
+        "location": "Sawai Mansingh Stadium, Jaipur, Rajasthan",
+        "date": "2019-04-20T14:30:00.000Z"
+    },
+    {
+        "team1": "Royal Challengers Bangalore (RCB)",
+        "team2": "Kolkata Knight Riders (KKR)",
+        "location": "M.Chinnaswamy Stadium, Bengaluru, Karnataka.",
+        "date": "2019-04-21T10:30:00.000Z"
+    },
+    {
+        "team1": "Chennai Super Kings (CSK)",
+        "team2": "Delhi Capitals (DC)",
+        "location": "M.A.Chidambaram Chepauk Stadium, Chennai, Tamilnadu.",
+        "date": "2019-04-21T14:30:00.000Z"
+    },
+    {
+        "team1": "Royal Challengers Bangalore (RCB)",
+        "team2": "Mumbai Indians (MI)",
+        "location": "M.Chinnaswamy Stadium, Bengaluru, Karnataka.",
+        "date": "2019-04-22T14:30:00.000Z"
+    },
+    {
+        "team1": "Delhi Capitals (DC)",
+        "team2": "Rajasthan Royals (RR)",
+        "location": "Feroz Shah Kotla Stadium Delhi",
+        "date": "2019-04-23T14:30:00.000Z"
+    },
+    {
+        "team1": "Kolkata Knight Riders (KKR)",
+        "team2": "Chennai Super Kings (CSK)",
+        "location": "Eden Gardens Kolkata, West Bengal.",
+        "date": "2019-04-24T14:30:00.000Z"
+    },
+    {
+        "team1": "Kings XI Punjab (KXIP)",
+        "team2": "Mumbai Indians (MI)",
+        "location": "PCA Stadium Mohali, Punjab",
+        "date": "2019-04-25T14:30:00.000Z"
+    },
+    {
+        "team1": "Chennai Super Kings (CSK)",
+        "team2": "Royal Challengers Bangalore (RCB)",
+        "location": " M.A.Chidambaram Chepauk Stadium, Chennai, Tamilnadu.",
+        "date": "2019-04-26T14:30:00.000Z"
+    },
+    {
+        "team1": "Sun Risers Hyderabad (SRH)",
+        "team2": "Delhi Capitals (DC)",
+        "location": "R.G.I. Cricket Stadium, Hyderabad, Telangana.",
+        "date": "2019-04-27T10:30:00.000Z"
+    },
+    {
+        "team1": "Mumbai Indians (MI)",
+        "team2": "Kolkata Knight Riders (KKR)",
+        "location": "Wankhede Stadium Mumbai, Maharashtra.",
+        "date": "2019-04-27T14:30:00.000Z"
+    },
+    {
+        "team1": "Kings XI Punjab (KXIP)",
+        "team2": "Rajasthan Royals (RR)",
+        "location": "PCA Stadium Mohali, Punjab",
+        "date": "2019-04-28T10:30:00.000Z"
+    },
+    {
+        "team1": "Sun Risers Hyderabad (SRH)",
+        "team2": "Royal Challengers Bangalore (RCB)",
+        "location": "R.G.I. Cricket Stadium, Hyderabad, Telangana.",
+        "date": "2019-04-28T14:30:00.000Z"
+    },
+    {
+        "team1": "Rajasthan Royals (RR)",
+        "team2": "Kings XI Punjab (KXIP)",
+        "location": "Sawai Mansingh Stadium, Jaipur, Rajasthan",
+        "date": "2019-04-29T14:30:00.000Z"
+    },
+    {
+        "team1": "Kolkata Knight Riders (KKR)",
+        "team2": "Mumbai Indians (MI)",
+        "location": "Eden Gardens Kolkata, West Bengal.",
+        "date": "2019-04-30T14:30:00.000Z"
+    },
+    {
+        "team1": "Delhi Capitals (DC)",
+        "team2": "Sun Risers Hyderabad (SRH)",
+        "location": "Feroz Shah Kotla Stadium Delhi",
+        "date": "2019-05-01T14:30:00.000Z"
+    },
+    {
+        "team1": "Rajasthan Royals (RR)",
+        "team2": "Chennai Super Kings (CSK)",
+        "location": "Sawai Mansingh Stadium, Jaipur, Rajasthan",
+        "date": "2019-05-02T14:30:00.000Z"
+    },
+    {
+        "team1": "Kings XI Punjab (KXIP)",
+        "team2": "Kolkata Knight Riders (KKR)",
+        "location": "PCA Stadium Mohali, Punjab",
+        "date": "2019-05-03T14:30:00.000Z"
+    },
+    {
+        "team1": "Delhi Capitals (DC)",
+        "team2": "Rajasthan Royals (RR)",
+        "location": "Sheikh Zayed Cricket Stadium, Abu Dhabi.",
+        "date": "2019-05-04T10:30:00.000Z"
+    },
+    {
+        "team1": "Kings XI Punjab (KXIP)",
+        "team2": "Royal Challengers Bangalore (RCB)",
+        "location": "PCA Stadium Mohali, Punjab",
+        "date": "2019-05-04T14:30:00.000Z"
+    },
+    {
+        "team1": "Mumbai Indians (MI)",
+        "team2": "Rajasthan Royals (RR)",
+        "location": "Wankhede Stadium Mumbai, Maharashtra.",
+        "date": "2019-05-05T10:30:00.000Z"
+    },
+    {
+        "team1": "Kolkata Knight Riders (KKR)",
+        "team2": "Sun Risers Hyderabad (SRH)",
+        "location": "Eden Gardens Kolkata, West Bengal.",
+        "date": "2019-05-05T14:30:00.000Z"
+    },
+    {
+        "team1": "Chennai Super Kings (CSK)",
+        "team2": "Mumbai Indians (MI)",
+        "location": " M.A.Chidambaram Chepauk Stadium, Chennai, Tamilnadu.",
+        "date": "2019-05-06T14:30:00.000Z"
+    },
+    {
+        "team1": "Kolkata Knight Riders (KKR)",
+        "team2": "Rajasthan Royals (RR)",
+        "location": "Eden Gardens Kolkata, West Bengal.",
+        "date": "2019-05-07T14:30:00.000Z"
+    },
+    {
+        "team1": "Mumbai Indians (MI)",
+        "team2": "Kings XI Punjab (KXIP)",
+        "location": "Wankhede Stadium Mumbai, Maharashtra.",
+        "date": "2019-05-08T14:30:00.000Z"
+    },
+    {
+        "team1": "Royal Challengers Bangalore (RCB)",
+        "team2": "Rajasthan Royals (RR)",
+        "location": "M.Chinnaswamy Stadium, Bengaluru, Karnataka.",
+        "date": "2019-05-09T14:30:00.000Z"
+    },
+    {
+        "team1": "Delhi Capitals (DC)",
+        "team2": "Chennai Super Kings (CSK)",
+        "location": "Feroz Shah Kotla Stadium Delhi",
+        "date": "2019-05-01T14:30:00.000Z"
+    },
+    {
+        "team1": "Royal Challengers Bangalore (RCB)",
+        "team2": "Sun Risers Hyderabad (SRH)",
+        "location": "M.Chinnaswamy Stadium, Bengaluru, Karnataka.",
+        "date": "2019-05-02T10:30:00.000Z"
+    },
+    {
+        "team1": "Mumbai Indians (MI)",
+        "team2": "Kolkata Knight Riders (KKR)",
+        "location": "Wankhede Stadium Mumbai, Maharashtra.",
+        "date": "2019-05-02T14:30:00.000Z"
+    },
+    {
+        "team1": "Rajasthan Royals (RR)",
+        "team2": "Royal Challengers Bangalore (RCB)",
+        "location": "Sawai Mansingh Stadium, Jaipur, Rajasthan",
+        "date": "2019-05-03T10:30:00.000Z"
+    },
+    {
+        "team1": "Delhi Capitals (DC)",
+        "team2": "Chennai Super Kings (CSK)",
+        "location": "Feroz Shah Kotla Stadium Delhi",
+        "date": "2019-05-03T14:30:00.000Z"
+    },
+    {
+        "team1": "Mumbai Indians (MI)",
+        "team2": "Kings XI Punjab (KXIP)",
+        "location": "Wankhede Stadium Mumbai, Maharashtra.",
+        "date": "2019-05-04T14:30:00.000Z"
+    },
+    {
+        "team1": "TBD",
+        "team2": "TBD",
+        "location": "Eden Gardens Kolkata, West Bengal.",
+        "date": "2019-05-06T14:30:00.000Z"
+    },
+    {
+        "team1": "Qualifier-1 TBD",
+        "team2": "Qualifier-1 TBD",
+        "location": "M.Chinnaswamy Stadium, Bengaluru, Karnataka.",
+        "date": "2019-05-08T14:30:00.000Z"
+    },
+    {
+        "team1": "Qualifier-2 TBD",
+        "team2": "Qualifier-2 TBD",
+        "location": "M.A.Chidambaram Chepauk Stadium, Chennai, Tamilnadu.",
+        "date": "2019-05-10T14:30:00.000Z"
+    },
+    {
+        "team1": "FINAL TBD",
+        "team2": "FINAL TBD",
+        "location": "Wankhede Stadium Mumbai, Maharashtra.",
+        "date": "2019-05-12T14:30:00.000Z"
+    }
+]

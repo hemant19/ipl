@@ -22,12 +22,12 @@ function Header({ loggedIn, onLogout, classes, history }) {
     <AppBar position="static" className={classes.root}>
       <Toolbar>
         <Typography
-          variant="title"
+          variant="h6"
           color="inherit"
           className={classes.title}
           onClick={_ => history.push('/')}
         >
-          IPL 2018
+          IPL 2019
         </Typography>
         {loggedIn ? (
           <IconButton color="inherit" onClick={e => onLogout()}>

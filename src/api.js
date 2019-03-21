@@ -37,7 +37,7 @@ export const postVote = (user, matchId, team) => {
           updatedBy: auth.currentUser.displayName
         }
       },
-      {merge: true}
+      { merge: true }
     );
   }
 };
@@ -59,8 +59,6 @@ export function fetchMatches() {
 
   return store
     .collection('matches')
-    .where('date', '<', dayAfterTomorrow)
-    .where('date', '>', yesterday)
     .orderBy('date')
     .get()
     .then(snap => snap.docs)
@@ -68,9 +66,9 @@ export function fetchMatches() {
       docs =>
         docs && docs.length !== 0
           ? docs
-            .map(doc => ({[doc.id]: {...doc.data(), isVoting: false}}))
+            .map(doc => ({[doc.id]: {...doc.data(), isVoting: false, date: doc.data().date.toDate()}}))
             .reduce((acc = {}, doc) => {
-              return doc ? {...acc, ...doc} : acc;
+              return doc ? { ...acc, ...doc } : acc;
             }, {})
           : {}
     );
@@ -134,8 +132,8 @@ export function getVoteDetails(isAdmin, matchId) {
               .map(([userId, vote]) => vote.username);
 
             return {
-              team1: match.team1,
-              team2: match.team2,
+              team1: match.team1 ? match.team1 : "",
+              team2: match.team2 ? match.team2 : "",
               team1Players,
               team2Players
             };
@@ -169,7 +167,7 @@ export function getUsers() {
       const docs = collection.docs;
 
       docs.forEach(user => {
-        users.push({uid: user.id, ...user.data()});
+        users.push({ uid: user.id, ...user.data() });
       });
 
       return users;
