@@ -28,8 +28,8 @@ function setTokenSentToServer(sent) {
 }
 
 function setupRefreshToken() {
-  messaging.onTokenRefresh(function() {
-    messaging
+  firebase.messaging().onTokenRefresh(function() {
+    firebase.messaging()
       .getToken()
       .then(function(refreshedToken) {
         console.log('Token refreshed.');
@@ -43,7 +43,7 @@ function setupRefreshToken() {
 }
 
 function setupToken() {
-  messaging
+  firebase.messaging()
     .getToken()
     .then(function(currentToken) {
       if (currentToken) {
@@ -75,8 +75,12 @@ function requestPermission() {
 }
 
 export function init() {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  console.info("Trying to init messaging");
+  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator && firebase.messaging().isSupported()) {
+    console.info("Start init messaging");
+    firebase.messaging().usePublicVapidKey(VAPID_KEY);
     setupRefreshToken();
     requestPermission();
+    console.info("Finish init messaging");
   }
 }
