@@ -8,12 +8,11 @@ import {
   Typography,
   FormControl,
   FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup
+  FormLabel
 } from '@material-ui/core';
-import { CircularProgress } from '@material-ui/core/LinearProgress';
-import { withStyles } from '@material-ui/core/styles';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 const styles = theme => ({
@@ -42,7 +41,6 @@ const renderVotingForm = (team1, team2, vote, isVoting, onVote, classes) => {
           className={classes.group}
           value={vote}
           onChange={(event, value) => onVote(value)}
-          disabled
         >
           <FormControlLabel
             value={team1}
@@ -58,14 +56,15 @@ const renderVotingForm = (team1, team2, vote, isVoting, onVote, classes) => {
           />
         </RadioGroup>
       </FormControl>
-      {isVoting ? <CircularProgress size={30}/> : null}
     </div>
   );
 };
 
 function renderVote(vote) {
   return vote ?
-    <Typography component="p">Your Vote - <b>{vote}</b></Typography> :
+    <Typography component="p">Your Vote -
+      <b>{vote}</b>
+    </Typography> :
     <Typography component="p">Hard Luck Mate!</Typography>;
 }
 
@@ -87,7 +86,9 @@ function renderCloseVotingButton(onVotingClose) {
 
 function renderWinner(winner) {
   return winner ?
-    <Typography component="p">Match Winner - <b>{winner}</b></Typography> :
+    <Typography component="p">Match Winner -
+      <b>{winner}</b>
+    </Typography> :
     null;
 }
 

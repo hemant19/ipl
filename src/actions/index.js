@@ -86,7 +86,7 @@ export const vote = (user, matchId, team) => dispatch => {
         id: matchId,
         match: {selection: team, isVoting: false}
       });
-      dispatch(notify('Your choice has been recorded!'));
+      // dispatch(notify('Your choice has been recorded!'));
     })
     .catch(() => {
       dispatch({
@@ -95,7 +95,7 @@ export const vote = (user, matchId, team) => dispatch => {
         match: {isVoting: false}
       });
 
-      dispatch(notify('Some error occurred.Please reload', 'reload'));
+      // dispatch(notify('Some error occurred.Please reload', 'reload'));
     });
 };
 
