@@ -71,7 +71,6 @@ class MatchVotes extends React.Component {
   render() {
     const { classes } = this.props;
     const { details } = this.state;
-
     if (
       details.team1Players.length === 0 &&
       details.team2Players.length === 0
@@ -94,14 +93,14 @@ class MatchVotes extends React.Component {
             <Paper>
               <Typography
                 className={classes.title}
-                variant="title"
+                variant="h5"
                 component="p"
               >
                 {details.team1}: <b>{team1Points}</b>
               </Typography>
               <Typography
                 className={classes.title}
-                variant="title"
+                variant="h5"
                 component="p"
               >
                 {details.team2}: <b>{team2Points}</b>
@@ -113,26 +112,18 @@ class MatchVotes extends React.Component {
               <Typography variant="h5" className={classes.title}>
                 {details.team1}
               </Typography>
-              <List className={classes.root} subheader={<li />}>
-                {details.team1Players.map((name, i) => (
-                  <ListItem key={i}>
-                    <ListItemText primary={name} />
-                  </ListItem>
-                ))}
+              <List className={classes.root}>
+                {details.team1Players.map((player,i) => <p key={i}>{player}</p>)}
               </List>
             </Paper>
-          </Grid>
+          </Grid>         
           <Grid item xs={6}>
             <Paper>
               <Typography variant="h5" className={classes.title}>
                 {this.state.details.team2}
               </Typography>
-              <List subheader={<li />}>
-                {this.state.details.team2Players.map((name, i) => (
-                  <ListItem key={i}>
-                    <ListItemText primary={name} />
-                  </ListItem>
-                ))}
+              <List className={classes.root}>
+                {details.team2Players.map((player,i) => <p key={i}>{player}</p>)}
               </List>
             </Paper>
           </Grid>
