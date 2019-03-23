@@ -39,7 +39,7 @@ const renderVotingForm = (team1, team2, vote, isVoting, onVote, classes) => {
           aria-label="My Team"
           name="myTeam"
           className={classes.group}
-          value={vote}
+          value={vote?vote:''}
           onChange={(event, value) => onVote(value)}
         >
           <FormControlLabel
@@ -64,7 +64,8 @@ function renderVote(vote) {
   return vote ?
     <Typography component="p">Your Vote -
       <b>{vote}</b>
-    </Typography> : <br/>
+    </Typography> :
+    <Typography component="p">Hard Luck Mate!</Typography>;
 }
 
 function renderDetailsButton(onViewDetails) {
@@ -121,8 +122,7 @@ const Match = ({
         <Typography className={classes.location}>{location}</Typography>
         <br/>
 
-        {renderVotingForm(team1, team2, vote, isVoting, onVote, classes)}
-        {renderVote(vote)}
+        {votingEnabled ? renderVotingForm(team1, team2, vote, isVoting, onVote, classes) : renderVote(vote)}
         {renderWinner(winner)}
         {matchWinnerSelectionEnabled ? renderVotingForm(team1, team2, winner, isVoting, onMatchWinnerSelected, classes) : null}
         <CardActions>
