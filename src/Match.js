@@ -64,8 +64,7 @@ function renderVote(vote) {
   return vote ?
     <Typography component="p">Your Vote -
       <b>{vote}</b>
-    </Typography> :
-    <Typography component="p">Hard Luck Mate!</Typography>;
+    </Typography> : <br/>
 }
 
 function renderDetailsButton(onViewDetails) {
@@ -122,7 +121,8 @@ const Match = ({
         <Typography className={classes.location}>{location}</Typography>
         <br/>
 
-        {votingEnabled ? renderVotingForm(team1, team2, vote, isVoting, onVote, classes) : renderVote(vote)}
+        {renderVotingForm(team1, team2, vote, isVoting, onVote, classes)}
+        {renderVote(vote)}
         {renderWinner(winner)}
         {matchWinnerSelectionEnabled ? renderVotingForm(team1, team2, winner, isVoting, onMatchWinnerSelected, classes) : null}
         <CardActions>
