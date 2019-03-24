@@ -20,12 +20,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
-**/config/
-
 .idea/
 **/**.iml
 **/**.ipr
 
-.firebase/
-.env/
+.firebase
+.envxw

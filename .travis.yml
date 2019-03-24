@@ -4,6 +4,7 @@ node_js:
 
 before_install: 
   - yarn install
+  - yarn build
 
 deploy:
   provider: firebase
