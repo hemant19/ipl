@@ -54,8 +54,8 @@ export function postWinner(id, winner) {
 }
 
 export function fetchMatches() {
-  const yesterday = new Date(Date.now() - 100000000);
-  const dayAfterTomorrow = new Date(Date.now() + 180000000);
+  // const yesterday = new Date(Date.now() - 100000000);
+  // const dayAfterTomorrow = new Date(Date.now() + 180000000);
 
   return store
     .collection('matches')
