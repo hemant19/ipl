@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import List from '@material-ui/icons/List';
 import { withRouter } from 'react-router-dom';
 
 const styles = {
@@ -29,6 +30,9 @@ function Header({ loggedIn, onLogout, classes, history }) {
         >
           IPL 2019
         </Typography>
+          <IconButton color="inherit" onClick={e => history.push('/leaderBoard')}>
+            <List />
+          </IconButton>
         {loggedIn ? (
           <IconButton color="inherit" onClick={e => onLogout()}>
             <ExitToApp />

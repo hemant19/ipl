@@ -122,5 +122,5 @@ async function ramsVotes() {
 
 
 // resetPoints();
-updatePointsForAllMatches();
+// updatePointsForAllMatches();
 // ramsVotes();
