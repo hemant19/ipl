@@ -176,3 +176,14 @@ export function getUsers() {
 
   return new Promise(res => res(users));
 }
+
+export async function fetchUsers() {
+  const users = await store.collection("users").get();
+  const userJson = {};
+
+  users.forEach(user => {
+    userJson[user.id] = user.data();
+  })
+
+  return userJson;
+}

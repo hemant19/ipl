@@ -6,7 +6,8 @@ import {
   LOGOUT_USER,
   RECIEVE_MATCHES,
   UPDATE_USER,
-  UPDATE_MATCH
+  UPDATE_MATCH,
+  USERS_FETCHED
 } from './constants';
 import {
   fetchMatches,
@@ -14,7 +15,8 @@ import {
   fetchUserVote,
   postCloseVoting,
   fetchUserRoles,
-  postWinner
+  postWinner,
+  fetchUsers,
 } from '../api';
 
 export const addMatch = (id, match) => ({
@@ -157,3 +159,12 @@ export const updateUser = user => ({
 export const logoutUser = () => ({
   type: LOGOUT_USER
 });
+
+export const fetchUsersAction = () => (dispatch) => {
+  fetchUsers().then((users) => {
+    dispatch({
+      type: USERS_FETCHED,
+      users
+    })
+  })
+};

@@ -18,6 +18,7 @@ import {
   hideNotification,
   notify
 } from './actions';
+import LeaderBoard from './LeaderBoard';
 
 const AsyncLogin = asyncComponent(() => import('./Login'));
 
@@ -83,6 +84,7 @@ class App extends Component {
               path="/matches/:matchId"
               component={props => <MatchVotes {...props} user={user} />}
             />
+            <Route path="/leaderBoard" exact component={LeaderBoard} />
 
             <Snackbar
               anchorOrigin={{

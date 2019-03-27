@@ -1,6 +1,6 @@
 var admin = require("firebase-admin");
 
-var serviceAccount = require("./src/config/serviceAccount.json");
+var serviceAccount = require("/Users/hbhoyar/serviceAccount.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -52,4 +52,75 @@ function sendNotification() {
   })
 }
 
-addMatches()
+async function updatePoints(match, users) {
+  const data = match.data();
+  if (data.winner) {
+    console.info(`updating match ${match.id} with winner ${data.winner}`)
+    const votes = (await admin.firestore().collection("votes").doc(match.id).get()).data();
+
+    const winners = Object.entries(votes).filter(([id, vote]) => vote.team === data.winner);
+    const winnerIds = [];
+
+    const loot = ((15 - winners.length) * 50) / winners.length;
+
+    if (users) {
+      winners.forEach(([id, vote]) => {
+        if (users[id]) {
+          updateUserPoints(id, loot)
+          winnerIds.push(id);
+        };
+      })
+
+      Object.entries(users).forEach(([id, user]) => {
+        if (winnerIds.filter(winnerId => id === winnerId).length === 0) {
+          updateUserPoints(id, -50);
+        }
+      });
+    }
+
+  }
+}
+
+async function updateUserPoints(userId, loot) {
+  const userRef = admin.firestore().collection('users').doc(userId);
+  return admin.firestore().runTransaction(async transaction => {
+    const user = await transaction.get(userRef);
+    if (!user.exists) {
+      throw "Document does not exist!";
+    }
+    var points = user.data().points + loot;
+    transaction.update(userRef, { points });
+  });
+}
+
+async function updatePointsForAllMatches() {
+  const users = await admin.firestore().collection("users").get();
+  const usersJson = {};
+  users.forEach(user => usersJson[user.id] = user.data())
+  const matches = ["pum3LTtJRRwByvYxQ7nr", "jN8n3qKkQ1ubyAWfAyrJ", "IzolEPP3kBe5W91iOV20", "MNt4bVPUmFabm0wQRIY4", "mjafji3JAP15Ask7Fb7d", "AuFgJAI8YjFGRVylVZ7m", "MBxGkd6ZpUDt5SwhBtZz"];
+
+  for(let i=0; i < matches.length;i++) {
+    const match = await admin.firestore().collection("matches").doc(matches[i]).get()
+    await updatePoints(match, usersJson)
+  }
+
+}
+
+async function resetPoints() {
+  const users = await admin.firestore().collection("users").get();
+
+  users.forEach(user => {
+    user.ref.update({ points: 0 })
+  })
+}
+
+async function ramsVotes() {
+  const votes = await admin.firestore().collection("votes").get();
+  votes.forEach(matchVote => {
+  })
+}
+
+
+// resetPoints();
+updatePointsForAllMatches();
+// ramsVotes();
