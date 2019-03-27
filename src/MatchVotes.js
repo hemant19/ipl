@@ -113,11 +113,7 @@ class MatchVotes extends React.Component {
                 {details.team1}
               </Typography>
               <List className={classes.root}>
-                {details.team1Players.map((player, i) => (
-                  <ListItem key={i}>
-                    <ListItemText primary={player} />
-                  </ListItem>)
-                )}
+                {details.team1Players.map((player, i) => <p key={i}>{player}</p>)}
               </List>
             </Paper>
           </Grid>
