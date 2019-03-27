@@ -10,6 +10,10 @@ export const leaderBoard = (
       case USERS_FETCHED:
         const users = Object.entries(action.users)
         .map(([id, user]) => ({id, ...user}))
+        .map(match => ({
+          ...match,
+          points: match.points.toFixed(2)
+        }))
         .sort((a, b) => b.points - a.points);
 
         return {
