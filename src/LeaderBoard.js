@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchUsersAction } from './actions';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -32,11 +31,10 @@ const CustomTableCell = withStyles(theme => ({
 
 class LeaderBoard extends Component {
     componentDidMount() {
-        this.props.dispatch(fetchUsersAction());
     }
 
     render() {
-        const { classes, leaderBoard: { users } } = this.props;
+        const { classes, leaderBoard: { users, total } } = this.props;
 
         return (
             <Paper className={classes.root}>
@@ -54,6 +52,10 @@ class LeaderBoard extends Component {
                                 <CustomTableCell>{user.points}</CustomTableCell>
                             </TableRow>
                         ))}
+                        <TableRow className={classes.row} key="total">
+                            <CustomTableCell><b>Total</b></CustomTableCell>
+                            <CustomTableCell><b>{total}</b></CustomTableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             </Paper>

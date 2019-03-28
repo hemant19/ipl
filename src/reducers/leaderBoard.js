@@ -2,7 +2,8 @@ import {USERS_FETCHED} from '../actions/constants';
 
 export const leaderBoard = (
     state = {
-      users: []
+      users: [],
+      total: 0
     },
     action
   ) => {
@@ -16,8 +17,13 @@ export const leaderBoard = (
         }))
         .sort((a, b) => b.points - a.points);
 
+        let total = 0;
+
+        users.forEach(user => total += parseFloat(user.points));
+
         return {
-          users
+          users,
+          total
         };
       default:
         return state;

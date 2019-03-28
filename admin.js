@@ -93,11 +93,10 @@ async function updateUserPoints(userId, loot) {
   });
 }
 
-async function updatePointsForAllMatches() {
+async function updatePointsForAllMatches(matches) {
   const users = await admin.firestore().collection("users").get();
   const usersJson = {};
   users.forEach(user => usersJson[user.id] = user.data())
-  const matches = ["pum3LTtJRRwByvYxQ7nr", "jN8n3qKkQ1ubyAWfAyrJ", "IzolEPP3kBe5W91iOV20", "MNt4bVPUmFabm0wQRIY4", "mjafji3JAP15Ask7Fb7d", "AuFgJAI8YjFGRVylVZ7m", "MBxGkd6ZpUDt5SwhBtZz"];
 
   for(let i=0; i < matches.length;i++) {
     const match = await admin.firestore().collection("matches").doc(matches[i]).get()
@@ -114,13 +113,8 @@ async function resetPoints() {
   })
 }
 
-async function ramsVotes() {
-  const votes = await admin.firestore().collection("votes").get();
-  votes.forEach(matchVote => {
-  })
-}
-
-
 // resetPoints();
-// updatePointsForAllMatches();
+const matches = ["MBxGkd6ZpUDt5SwhBtZz"];
+
+updatePointsForAllMatches(matches);
 // ramsVotes();

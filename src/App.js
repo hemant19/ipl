@@ -16,7 +16,8 @@ import {
   logoutUser,
   recieveMatches,
   hideNotification,
-  notify
+  notify,
+  fetchUsersAction
 } from './actions';
 import LeaderBoard from './LeaderBoard';
 
@@ -26,6 +27,7 @@ class App extends Component {
   componentDidMount() {
     auth.onAuthStateChanged(this.handleOnLogin);
     this.props.dispatch(recieveMatches());
+    this.props.dispatch(fetchUsersAction());
   }
 
   componentWillMount() {
