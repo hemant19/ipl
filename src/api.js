@@ -54,12 +54,14 @@ export function postWinner(id, winner) {
 }
 
 export function fetchMatches() {
-  // const yesterday = new Date(Date.now() - 100000000);
-  // const dayAfterTomorrow = new Date(Date.now() + 180000000);
+  const yesterday = new Date(Date.now() - 100000000);
+  const maxDate = new Date(Date.now() + 400000000);
 
   return store
     .collection('matches')
     .orderBy('date')
+    .where("date", ">", yesterday)
+    .where("date", "<", maxDate)
     .get()
     .then(snap => snap.docs)
     .then(

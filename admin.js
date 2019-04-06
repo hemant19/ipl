@@ -8,12 +8,12 @@ admin.initializeApp({
 });
 
 function addMatches() {
-  var matches = require('./matches.json');
+  var matches = require('./remainingMatches.json');
 
   matches.map(match =>
     admin.firestore().collection('matches').add({
       ...match,
-      date: new Date(Date.parse(match.date))
+      date: new Date(match.date)
     })
   );
 }
@@ -98,7 +98,7 @@ async function updatePointsForAllMatches(matches) {
   const usersJson = {};
   users.forEach(user => usersJson[user.id] = user.data())
 
-  for(let i=0; i < matches.length;i++) {
+  for (let i = 0; i < matches.length; i++) {
     const match = await admin.firestore().collection("matches").doc(matches[i]).get()
     await updatePoints(match, usersJson)
   }
@@ -113,8 +113,37 @@ async function resetPoints() {
   })
 }
 
-// resetPoints();
-const matches = ["MBxGkd6ZpUDt5SwhBtZz"];
+async function deleteIncorrectMatches() {
+  const maxDate = new Date(Date.now() + 180000000);
 
-updatePointsForAllMatches(matches);
+  const matches = await admin.firestore().collection("matches")
+    .where("date", ">=",maxDate)
+    .get();
+
+    matches.forEach(doc => doc.ref.delete())
+}
+
+async function events() {
+  const eventsDocs = await admin.firestore().collection("events").get();
+  const events = [];
+
+  eventsDocs.forEach(e => {
+    events.push(e.data());
+  })
+
+  events.sort((e1, e2) => e2.timestamp - e1.timestamp)
+
+  events.filter(e => e.message.includes("bDj8KRD9FjOc5bdRTWyo")).forEach(e => console.log(e));
+}
+
+// resetPoints();
+// const matches = ["5kffHqYY1iDqbRcmml62"];
+
+// updatePointsForAllMatches(matches);
 // ramsVotes();
+
+// events()
+
+// deleteIncorrectMatches()
+
+addMatches()
