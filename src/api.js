@@ -60,8 +60,27 @@ export function fetchMatches() {
   return store
     .collection('matches')
     .orderBy('date')
-    .where("date", ">", yesterday)
+    // .where("date", ">", yesterday)
     .where("date", "<", maxDate)
+    .get()
+    .then(snap => snap.docs)
+    .then(
+      docs =>
+        docs && docs.length !== 0
+          ? docs
+            .map(doc => ({[doc.id]: {...doc.data(), isVoting: false, date: doc.data().date.toDate()}}))
+            .reduce((acc = {}, doc) => {
+              return doc ? { ...acc, ...doc } : acc;
+            }, {})
+          : {}
+    );
+}
+
+
+export function fetchAllMatches() {
+  return store
+    .collection('matches')
+    .orderBy('date')
     .get()
     .then(snap => snap.docs)
     .then(

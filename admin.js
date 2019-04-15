@@ -81,6 +81,37 @@ async function updatePoints(match, users) {
   }
 }
 
+
+async function changeMatchPoints(match, users) {
+  const data = match.data();
+  if (data.winner) {
+    console.info(`updating match ${match.id} with winner ${data.winner}`)
+    const votes = (await admin.firestore().collection("votes").doc(match.id).get()).data();
+
+    const winners = Object.entries(votes).filter(([id, vote]) => vote.team === data.winner);
+    const winnerIds = [];
+
+    const loot = ((15 - winners.length) * 50) / winners.length;
+
+    if (users) {
+      winners.forEach(([id, vote]) => {
+        if (users[id]) {
+          updateUserPoints(id, -loot)
+          winnerIds.push(id);
+        };
+      })
+
+      Object.entries(users).forEach(([id, user]) => {
+        if (winnerIds.filter(winnerId => id === winnerId).length === 0) {
+          updateUserPoints(id, 50);
+        }
+      });
+    }
+
+  }
+}
+
+
 async function updateUserPoints(userId, loot) {
   const userRef = admin.firestore().collection('users').doc(userId);
   return admin.firestore().runTransaction(async transaction => {
@@ -101,6 +132,18 @@ async function updatePointsForAllMatches(matches) {
   for (let i = 0; i < matches.length; i++) {
     const match = await admin.firestore().collection("matches").doc(matches[i]).get()
     await updatePoints(match, usersJson)
+  }
+
+}
+
+async function changeResultForMumbaiMatch(matches) {
+  const users = await admin.firestore().collection("users").get();
+  const usersJson = {};
+  users.forEach(user => usersJson[user.id] = user.data())
+
+  for (let i = 0; i < matches.length; i++) {
+    const match = await admin.firestore().collection("matches").doc(matches[i]).get()
+    await changeMatchPoints(match, usersJson)
   }
 
 }
@@ -133,17 +176,17 @@ async function events() {
 
   events.sort((e1, e2) => e2.timestamp - e1.timestamp)
 
-  events.filter(e => e.message.includes("bDj8KRD9FjOc5bdRTWyo")).forEach(e => console.log(e));
+  events.filter(e => e.message.includes("4yleDa4Cy1uGvI58EXWu")).forEach(e => console.log(e));
 }
 
 // resetPoints();
-// const matches = ["5kffHqYY1iDqbRcmml62"];
+const matches = ["4yleDa4Cy1uGvI58EXWu"];
 
-// updatePointsForAllMatches(matches);
+updatePointsForAllMatches(matches);
 // ramsVotes();
 
+
+// changeResultForMumbaiMatch(matches);
 // events()
 
 // deleteIncorrectMatches()
-
-addMatches()
